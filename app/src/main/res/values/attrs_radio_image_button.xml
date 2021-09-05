@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RadioImageButton">
+        <attr name="stringValue" format="string" />
+        <attr name="integerValue" format="integer" />
+        <attr name="booleanValue" format="boolean" />
+        <attr name="text" format="string" />
+        <attr name="hideDivider" format="boolean" />
+    </declare-styleable>
+</resources>

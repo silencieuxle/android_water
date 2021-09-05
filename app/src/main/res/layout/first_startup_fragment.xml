@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:orientation="vertical"
+    android:theme="@style/Theme.Water"
+    android:gravity="center_vertical"
+    tools:background="@color/purpleLighter"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.first_startup.FirstStartupFragment">
+
+    <TextView
+        style="@style/Theme.Water.TextView"
+        android:id="@+id/tv_appname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:textAlignment="center"
+        android:layout_gravity="center_horizontal"
+        android:textSize="72sp"
+        android:textFontWeight="800"
+        android:textAllCaps="true"
+        android:text="@string/app_name" />
+
+    <RadioGroup
+        android:id="@+id/rbg_gender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+        <TextView
+            style="@style/Theme.Water.TextView"
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="16dp"
+            android:text="Gender:"/>
+        <RadioButton
+            style="@style/Theme.Water.TextView"
+            android:id="@+id/rb_male"
+            android:checked="true"
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="Male" />
+        <RadioButton
+            style="@style/Theme.Water.TextView"
+            android:id="@+id/rb_female"
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="Female" />
+        <RadioButton
+            style="@style/Theme.Water.TextView"
+            android:id="@+id/rb_other"
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Other" />
+    </RadioGroup>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_default_weapon"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
+        app:hintAnimationEnabled="true"
+        app:hintEnabled="true"
+        android:layout_marginBottom="16dp"
+        android:hint="@string/default_weapon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <AutoCompleteTextView
+            android:id="@+id/actv_default_weapon"
+            android:layout_width="match_parent"
+            android:inputType="none"
+            android:text="Cup"
+            android:textEditSuggestionItemLayout="@layout/dropdown_item"
+            android:layout_height="match_parent" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        app:hintAnimationEnabled="true"
+        app:hintEnabled="true"
+        android:hint="@string/default_volume"
+        android:id="@+id/til_default_volume"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="16dp"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiet_default_volume"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:inputType="number"
+            android:text="100"
+            android:maxLines="1" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        app:hintAnimationEnabled="true"
+        app:hintEnabled="true"
+        android:hint="@string/default_goal"
+        android:id="@+id/til_default_goal"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="16dp"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiet_default_goal"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:inputType="number"
+            android:text="3000"
+            android:maxLines="1" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btn_done"
+        android:padding="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/done" />
+
+</LinearLayout>

@@ -1,0 +1,34 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Water" parent="Theme.MaterialComponents.Light">
+        <item name="fontFamily">@font/rubik</item>
+        <item name="fontWeight">400</item>
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/purplePrimary</item>
+        <item name="colorPrimaryVariant">@color/purpleDarker</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/redSecondary</item>
+        <item name="colorSecondaryVariant">@color/redSecondary</item>
+        <item name="colorOnSecondary">@color/white</item>
+
+        <item name="colorSurface">@color/white</item>
+        <item name="colorError">@color/orange</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:textFontWeight">800</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="Theme.Water.TextView" parent="Theme.Water">
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+    </style>
+
+    <style name="Theme.Water.TextInputLayout" parent="Theme.Water">
+
+    </style>
+
+
+</resources>

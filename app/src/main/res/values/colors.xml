@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purpleLighter">#FF720D5D</color>
+    <color name="purplePrimary">#FF5D1049</color>
+    <color name="purpleDarker">#FF4E0D3A</color>
+
+    <color name="redSecondary">#FFE30425</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="light_blue_600">#FF039BE5</color>
+    <color name="light_blue_900">#FF01579B</color>
+    <color name="light_blue_A200">#FF40C4FF</color>
+    <color name="light_blue_A400">#FF00B0FF</color>
+    <color name="black_overlay">#66000000</color>
+
+    <color name="orange">#FFFFAB40</color>
+
+    <color name="bottom_sheet_background">#66000000</color>
+</resources>

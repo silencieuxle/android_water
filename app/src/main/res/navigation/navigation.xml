@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="me.gndev.water.ui.main.MainFragment"
+        android:label="main_fragment"
+        tools:layout="@layout/main_fragment" />
+    <fragment
+        android:id="@+id/firstStartupFragment"
+        android:name="me.gndev.water.ui.first_startup.FirstStartupFragment"
+        android:label="first_startup_fragment"
+        tools:layout="@layout/first_startup_fragment" >
+        <action
+            android:id="@+id/action_firstStartupFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+</navigation>
