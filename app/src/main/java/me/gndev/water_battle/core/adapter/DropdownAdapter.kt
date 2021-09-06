@@ -10,7 +10,11 @@ import androidx.annotation.LayoutRes
 import me.gndev.water_battle.R
 import me.gndev.water_battle.core.model.DropdownModelBase
 
-abstract class DropdownAdapter<T: DropdownModelBase>(private val c: Context, @LayoutRes val rl: Int, private val ds: List<T>) :
+abstract class DropdownAdapter<T : DropdownModelBase>(
+    private val c: Context,
+    @LayoutRes val rl: Int,
+    private val ds: List<T>
+) :
     ArrayAdapter<T>(c, rl, ds) {
 
     override fun getCount(): Int = ds.size

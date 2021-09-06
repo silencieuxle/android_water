@@ -14,14 +14,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.transition.MaterialContainerTransform
-import me.gndev.water_battle.util.DialogUtils
 import me.gndev.water_battle.MainActivityViewModel
 import me.gndev.water_battle.data.share_preferences.PrefManager
+import me.gndev.water_battle.util.DialogUtils
 import java.lang.reflect.ParameterizedType
 import javax.inject.Inject
 import kotlin.reflect.KClass
 
-abstract class FragmentBase<TViewModel: ViewModelBase>(@LayoutRes contentLayoutId: Int) : Fragment(contentLayoutId) {
+abstract class FragmentBase<TViewModel : ViewModelBase>(@LayoutRes contentLayoutId: Int) :
+    Fragment(contentLayoutId) {
     @Inject
     protected lateinit var prefManager: PrefManager
 

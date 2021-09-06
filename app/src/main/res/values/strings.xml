@@ -25,4 +25,5 @@
     <string name="placeholder_medium">Lorem ipsum dolor sit amet, consectetur adipiscing elit</string>
     <string name="placeholder_short">Lorem ipsum dolor sit amet</string>
     <string name="placeholder_extra_short">Lorem</string>
+    <string name="no_score_message">HIT THAT BUTTON!!!</string>
 </resources>

@@ -5,10 +5,10 @@ import android.widget.Toast
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
 import androidx.fragment.app.Fragment
-import me.gndev.water_battle.util.DialogUtils
 import me.gndev.water_battle.R
 import me.gndev.water_battle.core.constant.SharePreferences
 import me.gndev.water_battle.data.share_preferences.PrefManager
+import me.gndev.water_battle.util.DialogUtils
 import java.util.concurrent.Executor
 import javax.inject.Inject
 
@@ -84,7 +84,10 @@ class BiometricService @Inject constructor(
                             negativeButtonText = context.getString(R.string.cancel)
                         )
                         getBiometricPrompt(executor, fragment, object : BiometricListener {
-                            override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
+                            override fun onAuthenticationError(
+                                errorCode: Int,
+                                errString: CharSequence
+                            ) {
                                 Toast.makeText(context, R.string.bio_auth_error, Toast.LENGTH_SHORT)
                                     .show()
                                 prefManager.setVal(SharePreferences.BIO_AUTH_ENABLED, false)

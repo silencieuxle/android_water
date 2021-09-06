@@ -28,15 +28,22 @@ object CommonExtensions {
         }
 
     fun Fragment.hideKeyboard() {
-        val imm = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val imm =
+            requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         if (requireView().hasWindowFocus()) {
-            imm.hideSoftInputFromWindow(this.requireView().windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+            imm.hideSoftInputFromWindow(
+                this.requireView().windowToken,
+                InputMethodManager.HIDE_NOT_ALWAYS
+            )
         } else {
             requireView().viewTreeObserver.addOnWindowFocusChangeListener(
                 object : ViewTreeObserver.OnWindowFocusChangeListener {
                     override fun onWindowFocusChanged(hasFocus: Boolean) {
                         if (hasFocus) {
-                            imm.hideSoftInputFromWindow(requireView().windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+                            imm.hideSoftInputFromWindow(
+                                requireView().windowToken,
+                                InputMethodManager.HIDE_NOT_ALWAYS
+                            )
                             requireView().viewTreeObserver.removeOnWindowFocusChangeListener(this)
                         }
                     }
@@ -66,7 +73,8 @@ object CommonExtensions {
     fun View.showTheKeyboardNow() {
         if (isFocused) {
             post {
-                val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                val imm =
+                    context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 imm.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
             }
         }

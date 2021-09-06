@@ -19,5 +19,6 @@ object DatabaseModule {
     fun provideGameDao(appDatabase: WaterDatabase): GameDao = appDatabase.gameDao()
 
     @Provides
-    fun provideStatisticView(appDatabase: WaterDatabase): StatisticsDao = appDatabase.statisticsDao()
+    fun provideStatisticView(appDatabase: WaterDatabase): StatisticsDao =
+        appDatabase.statisticsDao()
 }

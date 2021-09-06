@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android" android:opacity="opaque">
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:opacity="opaque">
     <item android:drawable="@color/purpleLighter" />
-    <item android:gravity="center" android:height="128dp" android:width="128dp" android:drawable="@drawable/ic_water_drop" />
+    <item
+        android:width="128dp"
+        android:height="128dp"
+        android:drawable="@drawable/ic_water_drop"
+        android:gravity="center" />
 </layer-list>

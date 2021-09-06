@@ -13,7 +13,7 @@
         android:id="@+id/firstStartupFragment"
         android:name="me.gndev.water_battle.ui.first_startup.FirstStartupFragment"
         android:label="first_startup_fragment"
-        tools:layout="@layout/first_startup_fragment" >
+        tools:layout="@layout/first_startup_fragment">
         <action
             android:id="@+id/action_firstStartupFragment_to_mainFragment"
             app:destination="@id/mainFragment" />

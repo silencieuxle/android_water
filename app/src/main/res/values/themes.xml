@@ -32,7 +32,7 @@
     <style name="Theme.Water.TextView" parent="Theme.Water">
         <item name="android:textColor">?attr/colorOnPrimary</item>
     </style>
-    
+
     <style name="Theme.Water.SplashScreen" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:windowBackground">@drawable/splash_background</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>

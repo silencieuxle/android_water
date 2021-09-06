@@ -86,10 +86,10 @@ class FirstStartupFragment @Inject constructor() :
 
         btnDone.setOnClickListener {
             val defaultVolume = if (tietDefaultVolume.text.toString().isNullOrEmpty()) 100
-                else tietDefaultVolume.text.toString().toInt()
+            else tietDefaultVolume.text.toString().toInt()
 
             val defaultGoal = if (tietDefaultGoal.text.toString().isNullOrEmpty()) 2000
-                else tietDefaultGoal.text.toString().toInt()
+            else tietDefaultGoal.text.toString().toInt()
 
             prefManager.setVal(SharePreferences.DEFAULT_WEAPON, selectedWeapon)
             prefManager.setVal(SharePreferences.DEFAULT_VOLUME, defaultVolume)

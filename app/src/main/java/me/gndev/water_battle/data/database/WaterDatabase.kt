@@ -11,8 +11,9 @@ import me.gndev.water_battle.data.entity.Turn
 
 @Database(
     entities = [Game::class, Turn::class],
-    views = [GameStatisticsView::class], version = 1, exportSchema = false)
-abstract class WaterDatabase: RoomDatabase() {
+    views = [GameStatisticsView::class], version = 1, exportSchema = false
+)
+abstract class WaterDatabase : RoomDatabase() {
     abstract fun gameDao(): GameDao
     abstract fun turnDao(): TurnDao
     abstract fun statisticsDao(): StatisticsDao

@@ -27,18 +27,18 @@ class MainFragment : FragmentBase<MainViewModel>(R.layout.main_fragment) {
 
     private lateinit var currentGame: Game
 
-    private var defaultWeapon: Int = 0
-    private var defaultVolume: Int = 0
-    private var defaultGoal: Int = 0
-    private var totalVolume: Int = 0
+    private var weapon: Int = 0
+    private var volume: Int = 0
+    private var goal: Int = 0
+    private var score: Int = 0
     private var maxVolume: Int = 0
     private var isFirstStartup: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        defaultWeapon = prefManager.getIntVal(SharePreferences.DEFAULT_WEAPON, Weapon.CUP)
-        defaultVolume = prefManager.getIntVal(SharePreferences.DEFAULT_VOLUME, 100)
-        defaultGoal = prefManager.getIntVal(SharePreferences.DEFAULT_GOAL, 2000)
+        weapon = prefManager.getIntVal(SharePreferences.DEFAULT_WEAPON, Weapon.CUP)
+        volume = prefManager.getIntVal(SharePreferences.DEFAULT_VOLUME, 100)
+        goal = prefManager.getIntVal(SharePreferences.DEFAULT_GOAL, 2000)
         maxVolume = prefManager.getIntVal(SharePreferences.DEFAULT_MAX_VOLUME, 3700)
         isFirstStartup = prefManager.getBooleanVal(SharePreferences.IS_FIRST_STARTUP, true)
     }
@@ -47,7 +47,7 @@ class MainFragment : FragmentBase<MainViewModel>(R.layout.main_fragment) {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = MainFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -75,7 +75,7 @@ class MainFragment : FragmentBase<MainViewModel>(R.layout.main_fragment) {
                 prefManager.setVal(SharePreferences.IS_FIRST_STARTUP, false)
             }
             saveGameTurn()
-            tvTotalVolume.text = totalVolume.toString()
+            tvTotalVolume.text = score.toString()
         }
     }
 
@@ -83,8 +83,10 @@ class MainFragment : FragmentBase<MainViewModel>(R.layout.main_fragment) {
         mainActivityViewModel.currentGame.observe(viewLifecycleOwner, {
             it?.let {
                 currentGame = it
-                totalVolume = currentGame.score
-                tvTotalVolume.text = currentGame.score.toString()
+                score = currentGame.score
+                tvTotalVolume.text = if (score > 0) currentGame.score.toString() else getString(
+                    R.string.no_score_message
+                )
             }
         })
     }
@@ -94,21 +96,21 @@ class MainFragment : FragmentBase<MainViewModel>(R.layout.main_fragment) {
     }
 
     private fun saveGameTurn() {
-        totalVolume += defaultVolume
-        viewModel.saveTurn(Turn(volume = defaultVolume, gameId = currentGame.id))
-        mainActivityViewModel.updateCurrentGame(totalVolume)
+        score += volume
+        viewModel.saveTurn(Turn(weapon = weapon, volume = volume, gameId = currentGame.id))
+        mainActivityViewModel.updateCurrentGame(score)
 
-        if (totalVolume >= defaultGoal && totalVolume < defaultGoal + 200) {
+        if (score >= goal && score < goal + 200) {
             Toast.makeText(
                 requireContext(),
-                "You reached the goal of $defaultGoal!",
+                "You reached the goal of $goal!",
                 Toast.LENGTH_LONG
             ).show()
         }
-        if (totalVolume > defaultGoal + 200){
+        if (score > goal + 200) {
             Toast.makeText(
                 requireContext(),
-                "You drink too much, the goal is $defaultGoal!",
+                "You drink too much, the goal is $goal!",
                 Toast.LENGTH_LONG
             ).show()
         }

@@ -105,7 +105,6 @@ object DialogUtils {
     }
 
 
-
     /*fun showConfirmationDialog(
         context: Context,
         inflater: LayoutInflater,

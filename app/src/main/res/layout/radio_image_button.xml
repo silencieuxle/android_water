@@ -11,10 +11,10 @@
         android:id="@+id/tv_display_text"
         android:layout_width="wrap_content"
         android:layout_height="32dp"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="16dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="16dp"
         android:textColor="@color/white"
         tools:text="@string/placeholder_medium" />
 
@@ -25,7 +25,7 @@
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:layout_marginEnd="8dp"
-        tools:src="@drawable/ic_radio_button_checked"
-        android:contentDescription="@string/image_general_description" />
+        android:contentDescription="@string/image_general_description"
+        tools:src="@drawable/ic_radio_button_checked" />
 </RelativeLayout>
 

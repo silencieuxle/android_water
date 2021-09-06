@@ -3,7 +3,6 @@ package me.gndev.water_battle.data.repository
 import me.gndev.water_battle.core.model.DataResult
 import me.gndev.water_battle.data.dao.StatisticsDao
 import me.gndev.water_battle.data.entity.GameStatisticsView
-import java.lang.Exception
 import javax.inject.Inject
 import javax.inject.Singleton
 
