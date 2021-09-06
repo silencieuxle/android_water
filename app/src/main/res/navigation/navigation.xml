@@ -6,12 +6,12 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="me.gndev.water.ui.main.MainFragment"
+        android:name="me.gndev.water_battle.ui.main.MainFragment"
         android:label="main_fragment"
         tools:layout="@layout/main_fragment" />
     <fragment
         android:id="@+id/firstStartupFragment"
-        android:name="me.gndev.water.ui.first_startup.FirstStartupFragment"
+        android:name="me.gndev.water_battle.ui.first_startup.FirstStartupFragment"
         android:label="first_startup_fragment"
         tools:layout="@layout/first_startup_fragment" >
         <action

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="me.gndev.water">
+    package="me.gndev.water_battle">
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <application
-        android:name=".WaterApplication"
+        android:name="me.gndev.water_battle.WaterApplication"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/Theme.Water">
         <activity
-            android:name=".MainActivity"
+            android:name="me.gndev.water_battle.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.Water.SplashScreen"
             android:exported="true">

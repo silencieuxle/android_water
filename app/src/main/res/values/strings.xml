@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Water</string>
+    <string name="app_name">Water Battle</string>
     <string name="bio_auth_error">There was a problem while trying to authenticate using biometric. Please try again later.</string>
     <string name="dialog_enable_biometric_title">Use biometric?</string>
     <string name="dialog_enable_biometric_message">Do you want to use biometric to authorize the Water?</string>
