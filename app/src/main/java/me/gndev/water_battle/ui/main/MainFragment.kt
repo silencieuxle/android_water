@@ -22,8 +22,8 @@ class MainFragment : FragmentBase<MainViewModel>(R.layout.main_fragment) {
     private var _binding: MainFragmentBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var btnHit: Button
-    private lateinit var tvTotalVolume: TextView
+    private lateinit var btnTakeAShot: Button
+    private lateinit var tvScore: TextView
 
     private lateinit var currentGame: Game
 
@@ -67,15 +67,16 @@ class MainFragment : FragmentBase<MainViewModel>(R.layout.main_fragment) {
     }
 
     override fun setupViews() {
-        btnHit = binding.btnHit
-        tvTotalVolume = binding.tvTotalVolume
+        btnTakeAShot = binding.btnTakeAShot
+        tvScore = binding.tvScore
 
-        btnHit.setOnClickListener {
+        btnTakeAShot.setOnClickListener {
             if (isFirstStartup) {
+                isFirstStartup = !isFirstStartup
                 prefManager.setVal(SharePreferences.IS_FIRST_STARTUP, false)
             }
             saveGameTurn()
-            tvTotalVolume.text = score.toString()
+            tvScore.text = score.toString()
         }
     }
 
@@ -84,7 +85,7 @@ class MainFragment : FragmentBase<MainViewModel>(R.layout.main_fragment) {
             it?.let {
                 currentGame = it
                 score = currentGame.score
-                tvTotalVolume.text = if (score > 0) currentGame.score.toString() else getString(
+                tvScore.text = if (score > 0) currentGame.score.toString() else getString(
                     R.string.no_score_message
                 )
             }
