@@ -3,8 +3,8 @@ package me.gndev.water.data.entity
 import androidx.room.DatabaseView
 
 @DatabaseView(
-    "SELECT games.id as gameId, games.date as gameDate, games.score as gameScore," +
-    "turns.time as turnTime, turns.volume as turnVolume" +
+    "SELECT games.id AS gameId, games.date AS gameDate, games.score AS gameScore, " +
+    "turns.time AS turnTime, turns.volume AS turnVolume " +
     "FROM games INNER JOIN turns ON turns.gameId = games.id"
 )
 data class GameStatisticsView (

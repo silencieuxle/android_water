@@ -40,12 +40,14 @@ class MainActivity : AppCompatActivity() {
         val graph = inflater.inflate(R.navigation.navigation)
 
         viewModel.currentGame.observe(this, {
-            if (prefManager.getBooleanVal(SharePreferences.IS_FIRST_STARTUP, true)) {
-                graph.startDestination = R.id.firstStartupFragment
-            } else {
-                graph.startDestination = R.id.mainFragment
+            if (it != null) {
+                if (prefManager.getBooleanVal(SharePreferences.IS_FIRST_STARTUP, true)) {
+                    graph.startDestination = R.id.firstStartupFragment
+                } else {
+                    graph.startDestination = R.id.mainFragment
+                }
+                navHostFragment.navController.graph = graph
             }
-            navHostFragment.navController.graph = graph
         })
     }
 

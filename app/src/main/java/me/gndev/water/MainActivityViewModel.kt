@@ -24,7 +24,7 @@ class MainActivityViewModel @Inject constructor(
         viewModelScope.launch {
             when (val gameExists = gameRepository.exists(DateTimeUtils.getTodayAsNumber())) {
                 is DataResult.Success -> {
-                    var result = if (gameExists.data) {
+                    val result = if (gameExists.data) {
                         gameRepository.getToday()
                     } else {
                         gameRepository.insert(Game())
@@ -42,7 +42,7 @@ class MainActivityViewModel @Inject constructor(
     fun updateCurrentGame(totalVolume: Int) {
         viewModelScope.launch {
             _currentGame.value?.score = totalVolume
-            gameRepository.update(_currentGame?.value!!)
+            gameRepository.update(_currentGame.value!!)
         }
     }
 }

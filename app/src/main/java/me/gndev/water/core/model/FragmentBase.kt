@@ -78,6 +78,7 @@ abstract class FragmentBase<TViewModel: ViewModelBase>(@LayoutRes contentLayoutI
     abstract fun setupViews()
     abstract fun subscribeObservers()
 
+    @Suppress("UNCHECKED_CAST")
     private fun viewModelClass(): KClass<TViewModel> {
         return ((javaClass.genericSuperclass as ParameterizedType)
             .actualTypeArguments[0] as Class<TViewModel>).kotlin

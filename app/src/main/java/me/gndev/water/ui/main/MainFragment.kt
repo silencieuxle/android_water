@@ -29,7 +29,7 @@ class MainFragment : FragmentBase<MainViewModel>(R.layout.main_fragment) {
     private lateinit var btnHit: Button
     private lateinit var tvTotalVolume: TextView
 
-    private var currentGame: Game? = null
+    private lateinit var currentGame: Game
 
     private var defaultWeapon: Int = 0
     private var defaultVolume: Int = 0
@@ -77,8 +77,11 @@ class MainFragment : FragmentBase<MainViewModel>(R.layout.main_fragment) {
 
     override fun subscribeObservers() {
         mainActivityViewModel.currentGame.observe(viewLifecycleOwner, {
-            currentGame = it
-            tvTotalVolume.text = it.score.toString()
+            it?.let {
+                currentGame = it
+                totalVolume = currentGame.score
+                tvTotalVolume.text = currentGame.score.toString()
+            }
         })
     }
 
@@ -88,7 +91,7 @@ class MainFragment : FragmentBase<MainViewModel>(R.layout.main_fragment) {
 
     private fun saveGameTurn() {
         totalVolume += defaultVolume
-        viewModel.saveTurn(Turn(volume = defaultVolume, gameId = currentGame?.id!!))
+        viewModel.saveTurn(Turn(volume = defaultVolume, gameId = currentGame.id))
         mainActivityViewModel.updateCurrentGame(totalVolume)
 
         if (totalVolume >= defaultGoal && totalVolume < defaultGoal + 200) {

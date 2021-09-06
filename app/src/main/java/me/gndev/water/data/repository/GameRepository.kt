@@ -11,6 +11,14 @@ import javax.inject.Singleton
 class GameRepository @Inject constructor(
     private val gameDao: GameDao
 ) {
+    suspend fun getAll(): DataResult<List<Game>> {
+        return try {
+            return DataResult.Success(gameDao.getAll())
+        } catch (ex: Exception) {
+            DataResult.Error(ex.message)
+        }
+    }
+
     suspend fun exists(date: Long): DataResult<Boolean> {
         return try {
             return DataResult.Success(gameDao.exists(date))
