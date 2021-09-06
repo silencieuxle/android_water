@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AutoCompleteTextView
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,6 +30,7 @@ class FirstStartupFragment @Inject constructor() :
     private lateinit var actvDefaultWeapon: AutoCompleteTextView
     private lateinit var tietDefaultVolume: TextInputEditText
     private lateinit var tietDefaultGoal: TextInputEditText
+    private lateinit var tvAppName: TextView
 
     private var selectedWeapon: Int = 0
 
@@ -45,6 +48,7 @@ class FirstStartupFragment @Inject constructor() :
     }
 
     override fun setupViews() {
+        tvAppName = binding.tvAppName
         btnDone = binding.btnDone
         tietDefaultVolume = binding.tietDefaultVolume
         tietDefaultGoal = binding.tietDefaultGoal
@@ -91,8 +95,9 @@ class FirstStartupFragment @Inject constructor() :
             prefManager.setVal(SharePreferences.DEFAULT_VOLUME, defaultVolume)
             prefManager.setVal(SharePreferences.DEFAULT_GOAL, defaultGoal)
 
+            val extras = FragmentNavigatorExtras(tvAppName to "shared_element_container")
             findNavController().navigate(
-                FirstStartupFragmentDirections.actionFirstStartupFragmentToMainFragment()
+                FirstStartupFragmentDirections.actionFirstStartupFragmentToMainFragment(), extras
             )
         }
     }

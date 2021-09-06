@@ -1,11 +1,11 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Water" parent="Theme.MaterialComponents.Light">
+    <style name="Theme.Water" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="fontFamily">@font/rubik</item>
         <item name="fontWeight">400</item>
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purplePrimary</item>
-        <item name="colorPrimaryVariant">@color/purpleDarker</item>
+        <item name="colorPrimaryVariant">@color/purpleLighter</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/redSecondary</item>
@@ -20,15 +20,22 @@
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:textFontWeight">800</item>
         <item name="android:textSize">16sp</item>
+
+        <item name="android:windowActivityTransitions">true</item>
+
+        <!-- specify enter and exit transitions -->
+        <item name="android:windowEnterTransition">@android:transition/explode</item>
+        <item name="android:windowExitTransition">@android:transition/explode</item>
+
     </style>
 
     <style name="Theme.Water.TextView" parent="Theme.Water">
         <item name="android:textColor">?attr/colorOnPrimary</item>
     </style>
-
-    <style name="Theme.Water.TextInputLayout" parent="Theme.Water">
-
+    
+    <style name="Theme.Water.SplashScreen" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_background</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>
     </style>
-
-
 </resources>

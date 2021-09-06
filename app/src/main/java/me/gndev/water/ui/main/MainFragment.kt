@@ -36,6 +36,7 @@ class MainFragment : FragmentBase<MainViewModel>(R.layout.main_fragment) {
     private var defaultGoal: Int = 0
     private var totalVolume: Int = 0
     private var maxVolume: Int = 0
+    private var isFirstStartup: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +44,7 @@ class MainFragment : FragmentBase<MainViewModel>(R.layout.main_fragment) {
         defaultVolume = prefManager.getIntVal(SharePreferences.DEFAULT_VOLUME, 100)
         defaultGoal = prefManager.getIntVal(SharePreferences.DEFAULT_GOAL, 2000)
         maxVolume = prefManager.getIntVal(SharePreferences.DEFAULT_MAX_VOLUME, 3700)
+        isFirstStartup = prefManager.getBooleanVal(SharePreferences.IS_FIRST_STARTUP, true)
     }
 
     override fun onCreateView(
@@ -56,13 +58,16 @@ class MainFragment : FragmentBase<MainViewModel>(R.layout.main_fragment) {
 
     // Force close the activity on MainFragment
     override fun overrideBackButton() {
-        requireActivity().onBackPressedDispatcher.addCallback(
-            viewLifecycleOwner,
-            object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    requireActivity().finish()
-                }
-            })
+        if (!isFirstStartup) {
+            requireActivity().onBackPressedDispatcher.addCallback(
+                viewLifecycleOwner,
+                object : OnBackPressedCallback(true) {
+                    override fun handleOnBackPressed() {
+                        requireActivity().finish()
+                    }
+                })
+        }
+        super.overrideBackButton()
     }
 
     override fun setupViews() {
@@ -70,6 +75,9 @@ class MainFragment : FragmentBase<MainViewModel>(R.layout.main_fragment) {
         tvTotalVolume = binding.tvTotalVolume
 
         btnHit.setOnClickListener {
+            if (isFirstStartup) {
+                prefManager.setVal(SharePreferences.IS_FIRST_STARTUP, false)
+            }
             saveGameTurn()
             tvTotalVolume.text = totalVolume.toString()
         }

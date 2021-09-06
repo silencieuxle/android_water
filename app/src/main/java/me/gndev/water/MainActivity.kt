@@ -3,6 +3,8 @@ package me.gndev.water
 import android.content.Context
 import android.graphics.Rect
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -10,7 +12,6 @@ import android.widget.EditText
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import dagger.hilt.android.AndroidEntryPoint
 import me.gndev.water.core.constant.SharePreferences
@@ -26,21 +27,20 @@ class MainActivity : AppCompatActivity() {
     private val viewModel: MainActivityViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.Theme_Water)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
-
-        // This will cause the whole app lays out in fullscreen
         WindowCompat.setDecorFitsSystemWindows(window, false)
-        findViewById<View>(R.id.nav_host_fragment).applySystemBarsInset()
 
         viewModel.initGame()
-
-        val navHostFragment = (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment)
-        val inflater = navHostFragment.navController.navInflater
-        val graph = inflater.inflate(R.navigation.navigation)
-
         viewModel.currentGame.observe(this, {
+            // This will cause the whole app lays out in fullscreen
             if (it != null) {
+                findViewById<View>(R.id.nav_host_fragment).applySystemBarsInset()
+                val navHostFragment =
+                    (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment)
+                val inflater = navHostFragment.navController.navInflater
+                val graph = inflater.inflate(R.navigation.navigation)
                 if (prefManager.getBooleanVal(SharePreferences.IS_FIRST_STARTUP, true)) {
                     graph.startDestination = R.id.firstStartupFragment
                 } else {
@@ -49,6 +49,7 @@ class MainActivity : AppCompatActivity() {
                 navHostFragment.navController.graph = graph
             }
         })
+
     }
 
     // Touch outside dismiss keyboard
