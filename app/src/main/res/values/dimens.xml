@@ -3,4 +3,5 @@
     <dimen name="radius_small">4dp</dimen>
     <dimen name="radius_medium">16dp</dimen>
     <dimen name="radius_large">20dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
 </resources>

@@ -9,7 +9,6 @@ class WeaponDropDownAdapter(
     context: Context,
     @LayoutRes layoutRes: Int,
     dataSet: List<WeaponDropdownModel>
-) :
-    DropdownAdapter<WeaponDropdownModel>(context, layoutRes, dataSet)
+) : DropdownAdapter<WeaponDropdownModel>(context, layoutRes, dataSet)
 
 data class WeaponDropdownModel(val text: String, val value: String) : DropdownModelBase(text, value)

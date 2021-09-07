@@ -4,43 +4,50 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.AutoCompleteTextView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.navigation.fragment.findNavController
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
 import me.gndev.water_battle.R
-import me.gndev.water_battle.core.constant.SharePreferences
+import me.gndev.water_battle.core.constant.ActiveLevel
+import me.gndev.water_battle.core.constant.SharedPreferencesKey
+import me.gndev.water_battle.core.constant.UserSex
 import me.gndev.water_battle.core.constant.Weapon
 import me.gndev.water_battle.core.model.FragmentBase
 import me.gndev.water_battle.data.entity.Game
 import me.gndev.water_battle.data.entity.Turn
 import me.gndev.water_battle.databinding.MainFragmentBinding
+import me.gndev.water_battle.ui.first_startup.WeaponDropDownAdapter
+import me.gndev.water_battle.ui.first_startup.WeaponDropdownModel
 
 @AndroidEntryPoint
 class MainFragment : FragmentBase<MainViewModel>(R.layout.main_fragment) {
     private var _binding: MainFragmentBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var btnTakeAShot: Button
+    private lateinit var btnTakeAShot: MaterialButton
+    private lateinit var btnSettings: MaterialButton
+    private lateinit var actvWeapon: AutoCompleteTextView
+    private lateinit var tietVolume: TextInputEditText
     private lateinit var tvScore: TextView
-
     private lateinit var currentGame: Game
 
-    private var weapon: Int = 0
+    private var weapon: String = Weapon.CUP
     private var volume: Int = 0
     private var goal: Int = 0
     private var score: Int = 0
+    private var sex: String = UserSex.MALE
+    private var activeLevel: String = ActiveLevel.MODERATE
     private var maxVolume: Int = 0
     private var isFirstStartup: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        weapon = prefManager.getIntVal(SharePreferences.DEFAULT_WEAPON, Weapon.CUP)
-        volume = prefManager.getIntVal(SharePreferences.DEFAULT_VOLUME, 100)
-        goal = prefManager.getIntVal(SharePreferences.DEFAULT_GOAL, 2000)
-        maxVolume = prefManager.getIntVal(SharePreferences.DEFAULT_MAX_VOLUME, 3700)
-        isFirstStartup = prefManager.getBooleanVal(SharePreferences.IS_FIRST_STARTUP, true)
+        setVarValue()
     }
 
     override fun onCreateView(
@@ -54,29 +61,52 @@ class MainFragment : FragmentBase<MainViewModel>(R.layout.main_fragment) {
 
     // Force close the activity on MainFragment
     override fun overrideBackButton() {
-        if (!isFirstStartup) {
-            requireActivity().onBackPressedDispatcher.addCallback(
-                viewLifecycleOwner,
-                object : OnBackPressedCallback(true) {
-                    override fun handleOnBackPressed() {
-                        requireActivity().finish()
-                    }
-                })
-        }
-        super.overrideBackButton()
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    requireActivity().finish()
+                }
+            })
     }
 
     override fun setupViews() {
         btnTakeAShot = binding.btnTakeAShot
+        btnSettings = binding.btnSettings
         tvScore = binding.tvScore
+        tietVolume = binding.tietVolume
+        actvWeapon = binding.actvWeapon
+
+        val weaponListAdapter =
+            WeaponDropDownAdapter(
+                requireContext(), R.layout.dropdown_item, listOf(
+                    WeaponDropdownModel(Weapon.CUP, Weapon.CUP),
+                    WeaponDropdownModel(Weapon.BOTTLE, Weapon.BOTTLE),
+                    WeaponDropdownModel(Weapon.CAN, Weapon.CAN),
+                    WeaponDropdownModel(Weapon.TANK, Weapon.TANK)
+                )
+            )
+        actvWeapon.setAdapter(weaponListAdapter)
+        actvWeapon.setText(weapon, false)
+
+        actvWeapon.setOnItemClickListener { adapterView, _, i, _ ->
+            val selectedItem = adapterView.getItemAtPosition(i) as WeaponDropdownModel
+            weapon = selectedItem.value
+            actvWeapon.setText(selectedItem.text)
+        }
+        tietVolume.setText(volume.toString()) // passing Int to setText will cause the view to find the resource Id
+
+        btnSettings.setOnClickListener {
+            findNavController().navigate(MainFragmentDirections.actionMainFragmentToSettingsFragment())
+        }
 
         btnTakeAShot.setOnClickListener {
-            if (isFirstStartup) {
-                isFirstStartup = !isFirstStartup
-                prefManager.setVal(SharePreferences.IS_FIRST_STARTUP, false)
-            }
             saveGameTurn()
             tvScore.text = score.toString()
+            prefManager.setVal(
+                SharedPreferencesKey.LAST_HIT_VOLUME,
+                tietVolume.text.toString().toInt()
+            )
         }
     }
 
@@ -90,6 +120,10 @@ class MainFragment : FragmentBase<MainViewModel>(R.layout.main_fragment) {
                 )
             }
         })
+
+        prefManager.registerOnChangeListener { _, _ ->
+            setVarValue()
+        }
     }
 
     override fun setupActionBar() {
@@ -116,4 +150,23 @@ class MainFragment : FragmentBase<MainViewModel>(R.layout.main_fragment) {
             ).show()
         }
     }
+
+    private fun setVarValue() {
+        weapon = prefManager.getStringVal(SharedPreferencesKey.DEFAULT_WEAPON, Weapon.CUP)
+        volume = prefManager.getIntVal(SharedPreferencesKey.DEFAULT_VOLUME, 100)
+        goal = prefManager.getIntVal(SharedPreferencesKey.DEFAULT_GOAL, 2000)
+        sex = prefManager.getStringVal(SharedPreferencesKey.USER_GENDER, UserSex.MALE)
+        activeLevel = prefManager.getStringVal(SharedPreferencesKey.ACTIVE_LEVEL, UserSex.MALE)
+        maxVolume = prefManager.getIntVal(SharedPreferencesKey.DEFAULT_MAX_VOLUME, 3700)
+        isFirstStartup = prefManager.getBooleanVal(SharedPreferencesKey.IS_FIRST_STARTUP, true)
+    }
+
+    private fun getSuggestedMaxVolume(): Int {
+        return if (sex == UserSex.MALE) {
+            1
+        } else {
+            2
+        }
+    }
+
 }

@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.navigation.fragment.NavHostFragment
 import dagger.hilt.android.AndroidEntryPoint
-import me.gndev.water_battle.core.constant.SharePreferences
+import me.gndev.water_battle.core.constant.SharedPreferencesKey
 import me.gndev.water_battle.data.share_preferences.PrefManager
 import me.gndev.water_battle.util.CommonExtensions.applySystemBarsInset
 import javax.inject.Inject
@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
                     (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment)
                 val inflater = navHostFragment.navController.navInflater
                 val graph = inflater.inflate(R.navigation.navigation)
-                if (prefManager.getBooleanVal(SharePreferences.IS_FIRST_STARTUP, true)) {
+                if (prefManager.getBooleanVal(SharedPreferencesKey.IS_FIRST_STARTUP, true)) {
                     graph.startDestination = R.id.firstStartupFragment
                 } else {
                     graph.startDestination = R.id.mainFragment

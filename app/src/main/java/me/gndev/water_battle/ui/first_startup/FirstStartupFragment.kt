@@ -9,12 +9,12 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
-import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.transition.MaterialElevationScale
 import dagger.hilt.android.AndroidEntryPoint
 import me.gndev.water_battle.R
-import me.gndev.water_battle.core.constant.SharePreferences
+import me.gndev.water_battle.core.constant.SharedPreferencesKey
 import me.gndev.water_battle.core.constant.Weapon
 import me.gndev.water_battle.core.model.FragmentBase
 import me.gndev.water_battle.databinding.FirstStartupFragmentBinding
@@ -32,7 +32,13 @@ class FirstStartupFragment @Inject constructor() :
     private lateinit var tietDefaultGoal: TextInputEditText
     private lateinit var tvAppName: TextView
 
-    private var selectedWeapon: Int = 0
+    private var selectedWeapon: String = ""
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        exitTransition = MaterialElevationScale(/* growing= */ false)
+        reenterTransition = MaterialElevationScale(/* growing= */ true)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -68,36 +74,36 @@ class FirstStartupFragment @Inject constructor() :
 
         actvDefaultWeapon.setOnItemClickListener { adapterView, _, i, _ ->
             val weapon = adapterView.getItemAtPosition(i) as WeaponDropdownModel
-            selectedWeapon = weapon.value.toInt()
+            selectedWeapon = weapon.value
             actvDefaultWeapon.setText(weapon.text)
         }
 
         val weaponListAdapter =
             WeaponDropDownAdapter(
                 requireContext(), R.layout.dropdown_item, listOf(
-                    WeaponDropdownModel("Cup", Weapon.CUP.toString()),
-                    WeaponDropdownModel("Bottle", Weapon.BOTTLE.toString()),
-                    WeaponDropdownModel("Can", Weapon.CAN.toString()),
-                    WeaponDropdownModel("Tank", Weapon.TANK.toString())
+                    WeaponDropdownModel("Cup", Weapon.CUP),
+                    WeaponDropdownModel("Bottle", Weapon.BOTTLE),
+                    WeaponDropdownModel("Can", Weapon.CAN),
+                    WeaponDropdownModel("Tank", Weapon.TANK)
                 )
             )
         actvDefaultWeapon.setAdapter(weaponListAdapter)
-        actvDefaultWeapon.setSelection(0)
+        actvDefaultWeapon.setText(Weapon.CUP, false)
 
         btnDone.setOnClickListener {
-            val defaultVolume = if (tietDefaultVolume.text.toString().isNullOrEmpty()) 100
+            val defaultVolume = if (tietDefaultVolume.text.toString().isEmpty()) 100
             else tietDefaultVolume.text.toString().toInt()
 
-            val defaultGoal = if (tietDefaultGoal.text.toString().isNullOrEmpty()) 2000
+            val defaultGoal = if (tietDefaultGoal.text.toString().isEmpty()) 2000
             else tietDefaultGoal.text.toString().toInt()
 
-            prefManager.setVal(SharePreferences.DEFAULT_WEAPON, selectedWeapon)
-            prefManager.setVal(SharePreferences.DEFAULT_VOLUME, defaultVolume)
-            prefManager.setVal(SharePreferences.DEFAULT_GOAL, defaultGoal)
-
-            val extras = FragmentNavigatorExtras(tvAppName to "shared_element_container")
+            prefManager.setVal(SharedPreferencesKey.DEFAULT_WEAPON, selectedWeapon)
+            prefManager.setVal(SharedPreferencesKey.DEFAULT_VOLUME, defaultVolume)
+            prefManager.setVal(SharedPreferencesKey.DEFAULT_GOAL, defaultGoal)
+            prefManager.setVal(SharedPreferencesKey.IS_FIRST_STARTUP, false)
+            // val extras = FragmentNavigatorExtras(tvAppName to "shared_element_container")
             findNavController().navigate(
-                FirstStartupFragmentDirections.actionFirstStartupFragmentToMainFragment(), extras
+                FirstStartupFragmentDirections.actionFirstStartupFragmentToMainFragment()/*, extras*/
             )
         }
     }

@@ -3,6 +3,9 @@ package me.gndev.water_battle.di
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.room.Room
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKey
+import androidx.security.crypto.MasterKeys
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,8 +20,18 @@ import javax.inject.Singleton
 object BaseModules {
     @Singleton
     @Provides
-    fun provideSharedPreference(@ApplicationContext context: Context): SharedPreferences =
-        context.getSharedPreferences("prefs", Context.MODE_PRIVATE)
+    fun provideSharedPreference(@ApplicationContext context: Context): SharedPreferences {
+        val masterKeyBuilder = MasterKey.Builder(context)
+        val masterKeyAlias = masterKeyBuilder.setKeyScheme(MasterKey.KeyScheme.AES256_GCM).build()
+
+        return EncryptedSharedPreferences.create(
+            context,
+            "secured_prefs",
+            masterKeyAlias,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
+    }
 
     @Provides
     @Singleton

@@ -11,6 +11,6 @@ data class Turn(
     var time: Long = DateTimeUtils.getCurrentTimeAsNumber(),
     var date: Long = DateTimeUtils.getTodayAsNumber(),
     var volume: Int,
-    var weapon: Int = Weapon.CUP,
+    var weapon: String = Weapon.CUP,
     var gameId: Int
 )

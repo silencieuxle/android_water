@@ -14,8 +14,7 @@ abstract class DropdownAdapter<T : DropdownModelBase>(
     private val c: Context,
     @LayoutRes val rl: Int,
     private val ds: List<T>
-) :
-    ArrayAdapter<T>(c, rl, ds) {
+) : ArrayAdapter<T>(c, rl, ds) {
 
     override fun getCount(): Int = ds.size
 

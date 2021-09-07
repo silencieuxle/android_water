@@ -1,11 +1,11 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Water" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="Theme.Water" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="fontFamily">@font/rubik</item>
         <item name="fontWeight">400</item>
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purplePrimary</item>
-        <item name="colorPrimaryVariant">@color/purpleLighter</item>
+        <item name="colorPrimary">@color/purpleDarker</item>
+        <item name="colorPrimaryVariant">@color/purpleDarker</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/redSecondary</item>
@@ -19,18 +19,56 @@
         <!-- Customize your theme here. -->
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:textFontWeight">800</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:fontWeight">800</item>
 
         <item name="android:windowActivityTransitions">true</item>
+        <item name="android:windowContentTransitions">true</item>
 
         <!-- specify enter and exit transitions -->
         <item name="android:windowEnterTransition">@android:transition/explode</item>
         <item name="android:windowExitTransition">@android:transition/explode</item>
+    </style>
 
+    <style name="Theme.Water.Settings.Category.Header" parent="Theme.Water.TextView">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontWeight">900</item>
+        <item name="android:textFontWeight">900</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="Theme.Water.Settings.Category.Item.Title" parent="Theme.Water.TextView">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Theme.Water.Settings.Category.Item.Summary" parent="Theme.Water.TextView">
+        <item name="android:textSize">@dimen/_12ssp</item>
+        <item name="android:textColor">@color/teal_700</item>
     </style>
 
     <style name="Theme.Water.TextView" parent="Theme.Water">
         <item name="android:textColor">?attr/colorOnPrimary</item>
+    </style>
+
+    <style name="Theme.Water.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="android:layout_marginBottom">@dimen/_16sdp</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/_50sdp</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/_50sdp</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/_50sdp</item>
+        <item name="boxCornerRadiusTopStart">@dimen/_50sdp</item>
+        <item name="boxStrokeColor">@android:color/transparent</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="startIconTint">@color/redSecondary</item>
+    </style>
+
+    <style name="Theme.Water.DropdownInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu">
+        <item name="android:layout_marginBottom">@dimen/_16sdp</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/_50sdp</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/_50sdp</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/_50sdp</item>
+        <item name="boxCornerRadiusTopStart">@dimen/_50sdp</item>
+        <item name="boxStrokeColor">@android:color/transparent</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="startIconTint">@color/redSecondary</item>
     </style>
 
     <style name="Theme.Water.SplashScreen" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -38,4 +76,27 @@
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:windowTranslucentStatus">true</item>
     </style>
+
+    <style name="Theme.Water.CircledButton">
+        <item name="iconPadding">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:paddingStart">@dimen/_12sdp</item>
+        <item name="android:paddingEnd">@dimen/_12sdp</item>
+        <item name="android:paddingTop">@dimen/_12sdp</item>
+        <item name="android:paddingBottom">@dimen/_12sdp</item>
+        <item name="android:minWidth">@dimen/_12sdp</item>
+        <item name="android:minHeight">@dimen/_12sdp</item>
+        <item name="iconGravity">textStart</item>
+    </style>
+
+    <style name="Theme.Water.RoundedButton" parent="Widget.MaterialComponents.Button">
+        <item name="iconPadding">0dp</item>
+        <item name="android:paddingTop">@dimen/_8sdp</item>
+        <item name="android:paddingBottom">@dimen/_8sdp</item>
+        <item name="android:paddingStart">@dimen/_12sdp</item>
+        <item name="android:paddingEnd">@dimen/_12sdp</item>
+        <item name="cornerRadius">@dimen/_50sdp</item>
+    </style>
+
 </resources>

@@ -1,5 +1,7 @@
 package me.gndev.water_battle.data.share_preferences
 
+import android.content.SharedPreferences
+
 interface PrefManager {
     fun setVal(key: String, value: Long)
 
@@ -15,11 +17,13 @@ interface PrefManager {
 
     fun getIntVal(key: String, defaultVal: Int = 0): Int
 
-    fun getStringVal(key: String, defaultVal: String = ""): String?
+    fun getStringVal(key: String, defaultVal: String = ""): String
 
     fun contain(key: String): Boolean
 
     fun remove(key: String)
 
     fun clearAll()
+
+    fun registerOnChangeListener(listener: SharedPreferences.OnSharedPreferenceChangeListener)
 }

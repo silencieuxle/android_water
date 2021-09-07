@@ -1,8 +1,8 @@
 package me.gndev.water_battle.core.constant
 
 object Weapon {
-    const val CUP = 0
-    const val CAN = 1
-    const val BOTTLE = 2
-    const val TANK = 3
+    const val CUP = "CUP"
+    const val CAN = "CAN"
+    const val BOTTLE = "BOTTLE"
+    const val TANK = "TANK"
 }

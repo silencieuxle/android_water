@@ -27,8 +27,8 @@ class PrefManagerImpl @Inject constructor(
         sharedPreferences.edit().putString(key, value).apply()
     }
 
-    override fun getStringVal(key: String, defaultVal: String): String? {
-        return sharedPreferences.getString(key, "defaultVal")
+    override fun getStringVal(key: String, defaultVal: String): String {
+        return sharedPreferences.getString(key, defaultVal).orEmpty()
     }
 
     override fun setVal(key: String, value: Int) {
@@ -49,5 +49,9 @@ class PrefManagerImpl @Inject constructor(
 
     override fun clearAll() {
         sharedPreferences.edit().clear().apply()
+    }
+
+    override fun registerOnChangeListener(listener: SharedPreferences.OnSharedPreferenceChangeListener) {
+        sharedPreferences.registerOnSharedPreferenceChangeListener(listener)
     }
 }

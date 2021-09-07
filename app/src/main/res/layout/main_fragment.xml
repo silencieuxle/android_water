@@ -1,36 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_vertical"
-    android:orientation="vertical"
+    android:padding="16dp"
     android:theme="@style/Theme.Water"
-    tools:background="@color/purpleLighter"
+    android:transitionGroup="true"
+    tools:background="@color/purplePrimary"
     tools:context=".ui.main.MainFragment">
 
-    <TextView
-        android:id="@+id/tv_score"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_settings"
+        style="@style/Theme.Water.CircledButton"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_24sdp"
+        app:cornerRadius="@dimen/_50sdp"
+        app:icon="@drawable/ic_setting"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:gravity="center"
-        android:textFontWeight="800"
-        android:textSize="72sp"
-        android:theme="@style/Theme.Water.TextView"
-        android:transitionName="shared_element_container"
-        tools:text="500ml" />
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_take_a_shot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="48dp"
-        android:gravity="center"
-        android:padding="8dp"
-        android:text="@string/add"
-        app:icon="@drawable/ic_take_a_shot" />
+        <TextView
+            android:id="@+id/tv_score"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="48dp"
+            android:gravity="center_horizontal"
+            android:textAlignment="center"
+            android:textFontWeight="800"
+            android:textSize="@dimen/_52ssp"
+            android:theme="@style/Theme.Water.TextView"
+            android:transitionName="shared_element_container"
+            tools:text="500ml" />
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_weapon"
+                style="@style/Theme.Water.DropdownInputLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:layout_weight="1"
+                android:hint="@string/weapon"
+                app:startIconDrawable="@drawable/ic_weapon">
+
+                <AutoCompleteTextView
+                    android:id="@+id/actv_weapon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="bottom"
+                    android:inputType="none" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_volume"
+                style="@style/Theme.Water.TextInputLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_weight="1"
+                app:startIconDrawable="@drawable/ic_volume">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tiet_volume"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/volume"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:text="100" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_take_a_shot"
+            style="@style/Theme.Water.RoundedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:text="@string/add"
+            app:iconPadding="@dimen/_16sdp"
+            app:icon="@drawable/ic_take_a_shot" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

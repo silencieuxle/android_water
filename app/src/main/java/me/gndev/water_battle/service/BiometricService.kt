@@ -6,7 +6,7 @@ import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
 import androidx.fragment.app.Fragment
 import me.gndev.water_battle.R
-import me.gndev.water_battle.core.constant.SharePreferences
+import me.gndev.water_battle.core.constant.SharedPreferencesKey
 import me.gndev.water_battle.data.share_preferences.PrefManager
 import me.gndev.water_battle.util.DialogUtils
 import java.util.concurrent.Executor
@@ -90,7 +90,7 @@ class BiometricService @Inject constructor(
                             ) {
                                 Toast.makeText(context, R.string.bio_auth_error, Toast.LENGTH_SHORT)
                                     .show()
-                                prefManager.setVal(SharePreferences.BIO_AUTH_ENABLED, false)
+                                prefManager.setVal(SharedPreferencesKey.BIO_AUTH_ENABLED, false)
                             }
 
                             override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
@@ -99,7 +99,7 @@ class BiometricService @Inject constructor(
                                     R.string.bio_auth_success,
                                     Toast.LENGTH_SHORT
                                 ).show()
-                                prefManager.setVal(SharePreferences.BIO_AUTH_ENABLED, true)
+                                prefManager.setVal(SharedPreferencesKey.BIO_AUTH_ENABLED, true)
                             }
 
                             override fun onAuthenticationFailed() {
@@ -108,13 +108,13 @@ class BiometricService @Inject constructor(
                                     R.string.bio_auth_failed,
                                     Toast.LENGTH_SHORT
                                 ).show()
-                                prefManager.setVal(SharePreferences.BIO_AUTH_ENABLED, false)
+                                prefManager.setVal(SharedPreferencesKey.BIO_AUTH_ENABLED, false)
                             }
                         }).authenticate(promptInfo)
                     }
 
                     override fun onNegativeButtonClick() {
-                        prefManager.setVal(SharePreferences.BIO_AUTH_ENABLED, false)
+                        prefManager.setVal(SharedPreferencesKey.BIO_AUTH_ENABLED, false)
                     }
                 })
         } else {

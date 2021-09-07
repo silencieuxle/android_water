@@ -1,4 +1,12 @@
 <resources>
+    <!-- Placeholder strings -->
+    <string name="placeholder_extra_long">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
+    <string name="placeholder_long">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
+    <string name="placeholder_medium">Lorem ipsum dolor sit amet, consectetur adipiscing elit</string>
+    <string name="placeholder_short">Lorem ipsum dolor sit amet</string>
+    <string name="placeholder_extra_short">Lorem</string>
+
+    <!-- Application strings -->
     <string name="app_name">Water Battle</string>
     <string name="bio_auth_error">There was a problem while trying to authenticate using biometric. Please try again later.</string>
     <string name="dialog_enable_biometric_title">Use biometric?</string>
@@ -10,20 +18,42 @@
     <string name="cancel">Cancel</string>
 
     <string name="done">Done</string>
-    <string name="default_weapon">Default Weapon</string>
+    <string name="battle_settings_default_weapon">Default Weapon</string>
     <string name="default_volume">Default Volume</string>
-    <string name="add">Take one shot</string>
+    <string name="add">Take a shot</string>
     <string name="default_goal">Your Goal (Milliliter)</string>
     <string name="image_general_description">General Image Description</string>
-    <string name="gender_male">MALE</string>
-    <string name="gender_female">FEMALE</string>
-    <string name="gender_other">OTHER</string>
-
-    <!-- Placeholder strings -->
-    <string name="placeholder_extra_long">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
-    <string name="placeholder_long">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
-    <string name="placeholder_medium">Lorem ipsum dolor sit amet, consectetur adipiscing elit</string>
-    <string name="placeholder_short">Lorem ipsum dolor sit amet</string>
-    <string name="placeholder_extra_short">Lorem</string>
+    <string name="sex">SEX</string>
+    <string name="sex_male">MALE</string>
+    <string name="sex_female">FEMALE</string>
     <string name="no_score_message">HIT THAT BUTTON!!!</string>
+
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="general_settings">General Settings</string>
+    <string name="general_settings_use_bio_auth">Use Biometric</string>
+    <string name="general_settings_sync">Sync</string>
+
+    <string name="battle_settings">Battle Settings</string>
+    <string name="battle_settings_default_weapon_summary">This weapon will be used when you hit the button without selecting weapon manually.</string>
+    <string name="battle_settings_default_volume_summary">Default volume per hit if you don\'t manually specify in battle screen.</string>
+    <string name="battle_settings_default_volume">Default volume</string>
+    <string name="weapon">Weapon</string>
+    <string name="volume">Volume</string>
+
+    <string name="setting_on">On</string>
+    <string name="setting_off">Off</string>
 </resources>
