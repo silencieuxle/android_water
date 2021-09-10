@@ -16,8 +16,8 @@
         android:layout_height="@dimen/_72sdp"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="@dimen/_32sdp"
-        android:src="@drawable/ic_water_drop"
-        android:contentDescription="@string/image_general_description" />
+        android:contentDescription="@string/image_general_description"
+        android:src="@drawable/ic_water_drop" />
 
     <TextView
         style="@style/Theme.Water.TextView"
@@ -26,7 +26,7 @@
         android:layout_gravity="center_vertical"
         android:layout_marginBottom="@dimen/_32sdp"
         android:gravity="center_horizontal"
-        android:text="Welcome to Water Battle"
+        android:text="@string/onboarding_welcome_header"
         android:textAllCaps="true"
         android:textSize="@dimen/_32ssp" />
 
@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:gravity="center_horizontal"
-        android:text="Swipe left to continue >>>"
+        android:text="@string/onboarding_welcome_swipe_summary"
         android:textAllCaps="true" />
 
 </LinearLayout>

@@ -5,8 +5,8 @@
     android:layout_height="match_parent">
 
     <ProgressBar
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="@dimen/_48sdp"
+        android:layout_height="@dimen/_48sdp"
         android:layout_gravity="center" />
 
 </FrameLayout>

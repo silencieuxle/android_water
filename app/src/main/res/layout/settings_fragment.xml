@@ -19,14 +19,15 @@
             style="@style/Theme.Water.Settings.Category.Header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textFontWeight="900"
-            android:text="@string/general_settings" />
+            android:text="@string/general_settings"
+            android:textFontWeight="1000" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_marginTop="@dimen/_4sdp"
             android:layout_marginBottom="@dimen/_12sdp"
-            android:background="@color/teal_700"/>
+            android:background="@color/teal_700" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -37,10 +38,10 @@
                 android:id="@+id/iv_general_settings_use_bio"
                 android:layout_width="@dimen/_28sdp"
                 android:layout_height="@dimen/_28sdp"
+                android:contentDescription="@string/image_general_description"
                 android:src="@drawable/ic_bio"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="@string/image_general_description" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/general_settings_use_bio_title"
@@ -76,18 +77,18 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_marginBottom="@dimen/_32sdp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_32sdp">
 
             <ImageView
                 android:id="@+id/iv_general_settings_sync"
                 android:layout_width="@dimen/_28sdp"
                 android:layout_height="@dimen/_28sdp"
+                android:contentDescription="@string/image_general_description"
                 android:src="@drawable/ic_sync"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="@string/image_general_description" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/general_settings_sync_title"
@@ -127,12 +128,14 @@
             style="@style/Theme.Water.Settings.Category.Header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/battle_settings" />
+            android:textFontWeight="1000"
+            android:text="@string/game_settings" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_marginTop="@dimen/_4sdp"
             android:layout_marginBottom="@dimen/_16sdp"
-            android:background="@color/teal_700"/>
+            android:background="@color/teal_700" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

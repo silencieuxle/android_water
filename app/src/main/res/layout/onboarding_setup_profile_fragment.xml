@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="@dimen/_32sdp"
-        android:text="Let's setting up your profile ..."
+        android:text="@string/onboarding_setup_profile_header"
         android:textAllCaps="true"
         android:textSize="@dimen/_32sdp"
         app:layout_constraintTop_toTopOf="parent" />
@@ -28,8 +28,7 @@
         style="@style/Theme.Water.TextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        app:startIconDrawable="@drawable/ic_volume">
+        android:layout_gravity="center_vertical">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tiet_name"

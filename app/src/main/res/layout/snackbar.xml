@@ -10,53 +10,55 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/purpleDarker"
-        app:cardBackgroundColor="@color/purpleDarker"
         app:cardCornerRadius="@dimen/radius_medium">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="@dimen/_16sdp"
-            android:paddingTop="@dimen/_8sdp"
-            android:paddingEnd="@dimen/_16sdp"
-            android:paddingBottom="@dimen/_8sdp">
+            android:padding="@dimen/_8sdp">
 
             <ImageView
                 android:id="@+id/iv_icon"
                 android:layout_width="@dimen/_32sdp"
                 android:layout_height="@dimen/_32sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
                 android:contentDescription="@string/image_general_description"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/tv_title"
+                app:layout_constraintEnd_toStartOf="@id/ll_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:tint="@color/white"
                 tool:src="@drawable/ic_warning" />
 
-            <TextView
-                android:id="@+id/tv_title"
-                style="@style/Theme.Water.TextView"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/ll_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:text="GeeksforGeeks"
-                android:textAlignment="center"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@id/tv_content"
-                app:layout_constraintStart_toEndOf="@id/iv_icon"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tv_content"
-                style="@style/Theme.Water.TextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:text="Computer Science Portal"
+                android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/btn_action"
                 app:layout_constraintStart_toEndOf="@id/iv_icon"
-                app:layout_constraintTop_toBottomOf="@id/tv_title" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    style="@style/Theme.Water.TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="@dimen/_6sdp"
+                    android:textColor="@color/black"
+                    android:textFontWeight="1000"
+                    android:visibility="gone"
+                    tool:text="@string/placeholder_short" />
+
+                <TextView
+                    android:id="@+id/tv_message"
+                    style="@style/Theme.Water.TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/black"
+                    tool:text="@string/placeholder_medium" />
+            </LinearLayout>
+
 
             <TextView
                 android:id="@+id/btn_action"
@@ -64,9 +66,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:padding="@dimen/_4sdp"
                 android:textAllCaps="true"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:textColor="@color/redSecondary"
+                android:textFontWeight="1000"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/ll_content"
                 app:layout_constraintTop_toTopOf="parent"
                 tool:text="action" />
 

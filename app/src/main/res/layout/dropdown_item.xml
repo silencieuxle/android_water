@@ -16,8 +16,9 @@
         android:padding="@dimen/_12sdp"
         android:singleLine="true"
         tools:text="@string/placeholder_short" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/_2sdp"
-        android:background="@android:color/transparent"/>
+        android:background="@android:color/transparent" />
 </LinearLayout>
