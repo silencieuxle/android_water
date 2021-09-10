@@ -19,14 +19,14 @@
 
             <ImageView
                 android:id="@+id/iv_icon"
-                android:layout_width="@dimen/_32sdp"
-                android:layout_height="@dimen/_32sdp"
+                style="@style/SnackBarIcon"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
                 android:layout_marginEnd="@dimen/_8sdp"
                 android:contentDescription="@string/image_general_description"
                 app:layout_constraintEnd_toStartOf="@id/ll_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/white"
                 tool:src="@drawable/ic_warning" />
 
             <LinearLayout
@@ -41,36 +41,31 @@
 
                 <TextView
                     android:id="@+id/tv_title"
-                    style="@style/Theme.Water.TextView"
+                    style="@style/SnackBarTitle"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginBottom="@dimen/_6sdp"
                     android:textColor="@color/black"
-                    android:textFontWeight="1000"
                     android:visibility="gone"
                     tool:text="@string/placeholder_short" />
 
                 <TextView
                     android:id="@+id/tv_message"
-                    style="@style/Theme.Water.TextView"
+                    style="@style/SnackBarMessage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:textColor="@color/black"
+
                     tool:text="@string/placeholder_medium" />
             </LinearLayout>
 
-
             <TextView
                 android:id="@+id/btn_action"
-                style="@style/Theme.Water.TextView"
+                style="@style/SnackBarAction"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="@dimen/_8sdp"
-                android:padding="@dimen/_4sdp"
-                android:textAllCaps="true"
-                android:textColor="@color/redSecondary"
-                android:textFontWeight="1000"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/ll_content"
                 app:layout_constraintTop_toTopOf="parent"

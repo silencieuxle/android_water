@@ -17,13 +17,23 @@ import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.WindowCompat
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import me.gndev.water.core.base.ViewModelBase
 import me.gndev.water.core.constant.Container
 import me.gndev.water.core.constant.SharedPreferencesKey
+import me.gndev.water.core.model.DataResult
+import me.gndev.water.data.entity.Game
+import me.gndev.water.data.repository.GameRepository
 import me.gndev.water.data.share_preferences.PrefManager
 import me.gndev.water.util.CommonExtensions.applySystemBarsInset
+import me.gndev.water.util.DateTimeUtils
 import me.gndev.water.util.DimensionUtils
 import javax.inject.Inject
 
@@ -141,9 +151,9 @@ class MainActivity : AppCompatActivity() {
             topMargin = getStatusBarHeight() + DimensionUtils.pxFromDp(applicationContext, 16)
         }
         snackBarLayout.apply {
-            setPadding(0, 0, 0, 0);
+            setPadding(0, 0, 0, 0)
             layoutParams = params
-            addView(customSnackView, 0);
+            addView(customSnackView, 0)
         }
         snackBar.show()
     }
@@ -168,5 +178,39 @@ class MainActivity : AppCompatActivity() {
             result = resources.getDimensionPixelSize(resourceId)
         }
         return result
+    }
+}
+
+@HiltViewModel
+class MainActivityViewModel @Inject constructor(
+    private val gameRepository: GameRepository
+) : ViewModelBase() {
+    private val _currentGame: MutableLiveData<Game> = MutableLiveData()
+    val currentGame: LiveData<Game> get() = _currentGame
+
+    fun initGame() {
+        viewModelScope.launch {
+            when (val gameExists = gameRepository.exists(DateTimeUtils.getTodayAsNumber())) {
+                is DataResult.Success -> {
+                    val result = if (gameExists.data) {
+                        gameRepository.getToday()
+                    } else {
+                        gameRepository.insert(Game())
+                        gameRepository.getToday()
+                    }
+                    when (result) {
+                        is DataResult.Success -> _currentGame.value = result.data
+                        else -> errorLiveEvent.value = result as DataResult.Error
+                    }
+                }
+            }
+        }
+    }
+
+    fun updateCurrentGame(totalVolume: Int) {
+        viewModelScope.launch {
+            _currentGame.value?.score = totalVolume
+            gameRepository.update(_currentGame.value!!)
+        }
     }
 }

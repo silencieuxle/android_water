@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <inset xmlns:android="http://schemas.android.com/apk/res/android"
-    android:drawable="@drawable/bg_alert_error_dialog"
+    android:drawable="@drawable/bg_alert_dialog"
     android:insetLeft="@dimen/_8sdp"
     android:insetRight="@dimen/_8sdp" />

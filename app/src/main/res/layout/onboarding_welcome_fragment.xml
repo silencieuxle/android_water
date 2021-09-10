@@ -8,7 +8,7 @@
     android:padding="16dp"
     android:theme="@style/Theme.Water"
     android:transitionGroup="true"
-    tools:background="@color/purpleLighter"
+    tools:background="?attr/colorPrimary"
     tools:context=".ui.onboarding.OnboardingWelcomeFragment">
 
     <ImageView
@@ -20,18 +20,15 @@
         android:src="@drawable/ic_water_drop" />
 
     <TextView
-        style="@style/Theme.Water.TextView"
+        style="@style/OnboardingHeadline"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginBottom="@dimen/_32sdp"
         android:gravity="center_horizontal"
-        android:text="@string/onboarding_welcome_header"
-        android:textAllCaps="true"
-        android:textSize="@dimen/_32ssp" />
+        android:text="@string/onboarding_welcome_header" />
 
     <TextView
-        style="@style/Theme.Water.TextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"

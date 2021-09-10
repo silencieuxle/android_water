@@ -6,26 +6,22 @@
     android:layout_height="match_parent"
     android:gravity="center_vertical"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:theme="@style/Theme.Water"
+    android:padding="@dimen/_16sdp"
     android:transitionGroup="true"
-    tools:background="@color/purpleLighter"
+    tools:background="?attr/colorPrimary"
     tools:context=".ui.onboarding.OnboardingSetupProfileFragment">
 
     <TextView
-        style="@style/Theme.Water.TextView"
+        style="@style/OnboardingHeadline"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="@dimen/_32sdp"
-        android:text="@string/onboarding_setup_profile_header"
-        android:textAllCaps="true"
-        android:textSize="@dimen/_32sdp"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="@string/onboarding_setup_profile_header" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_name"
-        style="@style/Theme.Water.TextInputLayout"
+        style="@style/TextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical">
@@ -49,7 +45,6 @@
 
         <TextView
             android:id="@+id/tv_sex"
-            style="@style/Theme.Water.TextView"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginEnd="16dp"
@@ -68,7 +63,7 @@
 
             <RadioButton
                 android:id="@+id/rb_male"
-                style="@style/Theme.Water.TextView"
+                style="@style/RadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -79,7 +74,7 @@
 
             <RadioButton
                 android:id="@+id/rb_female"
-                style="@style/Theme.Water.TextView"
+                style="@style/RadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -90,11 +85,10 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_sex_help"
-            style="@style/Theme.Water.CircledButton"
+            style="@style/CircledIconButton"
             android:layout_width="@dimen/_28sdp"
             android:layout_height="@dimen/_28sdp"
             android:gravity="end"
-            android:padding="@dimen/_4sdp"
             app:cornerRadius="@dimen/_50sdp"
             app:icon="@drawable/ic_help"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -112,7 +106,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_age"
-            style="@style/Theme.Water.TextInputLayout"
+            style="@style/TextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -131,7 +125,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_height"
-            style="@style/Theme.Water.TextInputLayout"
+            style="@style/TextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -151,7 +145,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_weight"
-            style="@style/Theme.Water.TextInputLayout"
+            style="@style/TextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -171,7 +165,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_done"
-        style="@style/Theme.Water.RoundedButton"
+        style="@style/RoundedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"

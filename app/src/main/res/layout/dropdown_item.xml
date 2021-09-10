@@ -7,7 +7,6 @@
 
     <TextView
         android:id="@+id/tv_dropdown_item_text"
-        style="@style/Theme.Water.TextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_dropdown_item"
@@ -15,6 +14,7 @@
         android:maxLines="1"
         android:padding="@dimen/_12sdp"
         android:singleLine="true"
+        android:textColor="?attr/colorOnSurface"
         tools:text="@string/placeholder_short" />
 
     <View

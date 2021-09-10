@@ -7,12 +7,12 @@
     android:padding="16dp"
     android:theme="@style/Theme.Water"
     android:transitionGroup="true"
-    tools:background="@color/purpleLighter"
+    tools:background="?attr/colorPrimary"
     tools:context=".ui.main.MainFragment">
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_settings"
-        style="@style/Theme.Water.CircledButton"
+        style="@style/CircledIconButton"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_40sdp"
         android:layout_marginTop="@dimen/_24sdp"
@@ -37,21 +37,19 @@
             android:layout_marginBottom="48dp"
             android:gravity="center_horizontal"
             android:textAlignment="center"
-            android:textFontWeight="1000"
             android:textSize="@dimen/_52ssp"
-            android:theme="@style/Theme.Water.TextView"
             android:transitionName="shared_element_container"
             tools:text="500ml" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:baselineAligned="false">
+            android:baselineAligned="false"
+            android:orientation="horizontal">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_container"
-                style="@style/Theme.Water.DropdownInputLayout"
+                style="@style/DropdownInputLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
@@ -59,31 +57,29 @@
                 android:layout_weight="1"
                 android:dropDownVerticalOffset="@dimen/_4sdp"
                 android:hint="@string/container"
-                app:endIconDrawable="@drawable/ic_dropdown"
-                app:startIconDrawable="@drawable/ic_weapon">
+                app:endIconDrawable="@drawable/ic_dropdown">
 
                 <AutoCompleteTextView
                     android:id="@+id/actv_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:dropDownVerticalOffset="@dimen/_3sdp"
-                    android:gravity="bottom"
+                    android:gravity="center_horizontal"
                     android:inputType="none" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_volume"
-                style="@style/Theme.Water.TextInputLayout"
+                style="@style/TextInputLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_8sdp"
-                android:layout_weight="1"
-                app:startIconDrawable="@drawable/ic_volume">
+                android:layout_weight="1">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/tiet_volume"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
                     android:hint="@string/volume"
                     android:inputType="number"
                     android:maxLines="1" />
@@ -92,7 +88,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_take_a_shot"
-            style="@style/Theme.Water.RoundedButton"
+            style="@style/RoundedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"

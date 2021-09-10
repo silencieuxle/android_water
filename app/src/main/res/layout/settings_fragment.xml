@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/_16sdp"
-    android:theme="@style/Theme.Water"
-    tools:background="@color/purpleLighter"
+    tools:background="?attr/colorPrimary"
     tools:context=".ui.settings.SettingsFragment">
 
     <LinearLayout
@@ -16,11 +15,10 @@
 
         <TextView
             android:id="@+id/general_settings_tittle"
-            style="@style/Theme.Water.Settings.Category.Header"
+            style="@style/SettingsCategoryHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/general_settings"
-            android:textFontWeight="1000" />
+            android:text="@string/general_settings" />
 
         <View
             android:layout_width="match_parent"
@@ -36,8 +34,7 @@
 
             <ImageView
                 android:id="@+id/iv_general_settings_use_bio"
-                android:layout_width="@dimen/_28sdp"
-                android:layout_height="@dimen/_28sdp"
+                style="@style/SettingsItemIcon"
                 android:contentDescription="@string/image_general_description"
                 android:src="@drawable/ic_bio"
                 app:layout_constraintStart_toStartOf="parent"
@@ -45,7 +42,7 @@
 
             <TextView
                 android:id="@+id/general_settings_use_bio_title"
-                style="@style/Theme.Water.Settings.Category.Item.Title"
+                style="@style/SettingsItemTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_16sdp"
@@ -57,7 +54,7 @@
 
             <TextView
                 android:id="@+id/general_settings_enable_bio_summary"
-                style="@style/Theme.Water.Settings.Category.Item.Summary"
+                style="@style/SettingsItemSummary"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_16sdp"
@@ -83,8 +80,7 @@
 
             <ImageView
                 android:id="@+id/iv_general_settings_sync"
-                android:layout_width="@dimen/_28sdp"
-                android:layout_height="@dimen/_28sdp"
+                style="@style/SettingsItemIcon"
                 android:contentDescription="@string/image_general_description"
                 android:src="@drawable/ic_sync"
                 app:layout_constraintStart_toStartOf="parent"
@@ -92,7 +88,7 @@
 
             <TextView
                 android:id="@+id/general_settings_sync_title"
-                style="@style/Theme.Water.Settings.Category.Item.Title"
+                style="@style/SettingsItemTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_16sdp"
@@ -104,7 +100,7 @@
 
             <TextView
                 android:id="@+id/general_settings_sync_summary"
-                style="@style/Theme.Water.Settings.Category.Item.Summary"
+                style="@style/SettingsItemSummary"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_16sdp"
@@ -125,10 +121,9 @@
 
         <TextView
             android:id="@+id/battle_settings_tittle"
-            style="@style/Theme.Water.Settings.Category.Header"
+            style="@style/SettingsCategoryHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textFontWeight="1000"
             android:text="@string/game_settings" />
 
         <View

@@ -14,19 +14,16 @@
 
     <TextView
         android:id="@+id/tv_title"
-        style="@style/Theme.Water.TextView"
+        style="@style/DialogHeadline"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:textAlignment="center"
-        android:textAllCaps="true"
-        android:textSize="@dimen/_28ssp"
-        app:layout_constraintTop_toTopOf="parent"
         tools:text="@string/placeholder_short" />
 
     <TextView
+        style="@style/DialogBody"
         android:id="@+id/tv_message"
-        style="@style/Theme.Water.TextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_16sdp"
@@ -34,13 +31,11 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_continue"
-        style="@style/Theme.Water.RoundedButton"
+        style="@style/RoundedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/_16sdp"
-        app:icon="@drawable/ic_done"
-        app:iconPadding="@dimen/_8sdp"
-        app:layout_constraintTop_toBottomOf="@id/tv_message" />
+        app:icon="@drawable/ic_done" />
 
 </LinearLayout>

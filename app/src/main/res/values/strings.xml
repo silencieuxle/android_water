@@ -75,4 +75,6 @@
     <string name="onboarding_setup_profile_header">Let\'s setting up your profile …</string>
     <string name="onboarding_welcome_header">Welcome to Water</string>
     <string name="onboarding_welcome_swipe_summary">Swipe left to continue \>\>\>></string>
+    <string name="sex_help_summary">We don\'t use sexual behaviour to determine sex. We are mentioning the different biological and physiological characteristics of males and females. That\'s why there are only MALE and FEMALE.</string>
+    <string name="sex_help_title">Why only MALE and FEMALE?</string>
 </resources>

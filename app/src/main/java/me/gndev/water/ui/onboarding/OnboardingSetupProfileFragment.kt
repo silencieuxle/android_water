@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
+import android.widget.TextView
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.button.MaterialButton
@@ -22,6 +23,7 @@ import me.gndev.water.core.base.ViewModelBase
 import me.gndev.water.core.constant.SharedPreferencesKey
 import me.gndev.water.core.constant.UserSex
 import me.gndev.water.databinding.OnboardingSetupProfileFragmentBinding
+import me.gndev.water.util.DialogUtils
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -36,6 +38,7 @@ class OnboardingSetupProfileFragment @Inject constructor() :
     private lateinit var tietWeight: TextInputEditText
     private lateinit var btnDone: MaterialButton
     private lateinit var rbMale: RadioButton
+    private lateinit var btnSexHelp: MaterialButton
 
     private var minAge: Int = 0
     private var minHeight: Int = 0
@@ -118,15 +121,39 @@ class OnboardingSetupProfileFragment @Inject constructor() :
             }
         }
         rbMale = binding.rbMale
-        btnDone = binding.btnDone
-        btnDone.setOnClickListener {
-            prefManager.setVal(SharedPreferencesKey.USER_NAME, tietName.text.toString())
-            prefManager.setVal(SharedPreferencesKey.USER_SEX, if (rbMale.isChecked) UserSex.MALE else UserSex.FEMALE)
-            prefManager.setVal(SharedPreferencesKey.USER_AGE, tietAge.text.toString().toInt())
-            prefManager.setVal(SharedPreferencesKey.USER_HEIGHT, tietHeight.text.toString().toInt())
-            prefManager.setVal(SharedPreferencesKey.USER_WEIGHT, tietWeight.text.toString().toInt())
+        btnDone = binding.btnDone.apply {
+            setOnClickListener {
+                prefManager.setVal(SharedPreferencesKey.USER_NAME, tietName.text.toString())
+                prefManager.setVal(
+                    SharedPreferencesKey.USER_SEX,
+                    if (rbMale.isChecked) UserSex.MALE else UserSex.FEMALE
+                )
+                prefManager.setVal(SharedPreferencesKey.USER_AGE, tietAge.text.toString().toInt())
+                prefManager.setVal(
+                    SharedPreferencesKey.USER_HEIGHT,
+                    tietHeight.text.toString().toInt()
+                )
+                prefManager.setVal(
+                    SharedPreferencesKey.USER_WEIGHT,
+                    tietWeight.text.toString().toInt()
+                )
 
-            (this.parentFragment as OnboardingFragment).updateViewPager(2)
+                (parentFragment as OnboardingFragment).updateViewPager(2)
+            }
+        }
+
+        btnSexHelp = binding.btnSexHelp.apply {
+            setOnClickListener {
+                val view = layoutInflater.inflate(R.layout.sex_help_bottom_sheet, null)
+                view.findViewById<TextView>(R.id.tv_title).text =
+                    context.getString(R.string.sex_help_title)
+                view.findViewById<TextView>(R.id.tv_message).text =
+                    context.getString(R.string.sex_help_summary)
+                DialogUtils.getBottomDialog(
+                    requireContext(),
+                    view
+                ).show()
+            }
         }
     }
 

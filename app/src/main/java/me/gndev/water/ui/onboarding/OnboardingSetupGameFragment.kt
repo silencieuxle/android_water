@@ -41,7 +41,7 @@ class OnboardingSetupBattleSettingsFragment :
     private lateinit var tietVolume: TextInputEditText
     private lateinit var tietGoal: TextInputEditText
 
-    private var weapon: String = ""
+    private var container: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -87,7 +87,7 @@ class OnboardingSetupBattleSettingsFragment :
             )
             setOnItemClickListener { adapterView, _, i, _ ->
                 val selectedItem = adapterView.getItemAtPosition(i) as ContainerDropdownModel
-                weapon = selectedItem.value
+                container = selectedItem.value
                 actvContainer.setText(selectedItem.text)
             }
             setOnFocusChangeListener { _, hasFocus ->
@@ -177,23 +177,7 @@ class OnboardingSetupBattleSettingsFragment :
                                 negativeButtonTitle = "No",
                                 listener = object : DialogUtils.AlertDialogListener {
                                     override fun onPositiveButtonClick() {
-                                        prefManager.setVal(
-                                            SharedPreferencesKey.DEFAULT_CONTAINER,
-                                            weapon
-                                        )
-                                        prefManager.setVal(
-                                            SharedPreferencesKey.DEFAULT_VOLUME,
-                                            volume
-                                        )
-                                        prefManager.setVal(SharedPreferencesKey.DEFAULT_GOAL, goal)
-                                        prefManager.setVal(
-                                            SharedPreferencesKey.IS_FIRST_STARTUP,
-                                            false
-                                        )
-                                        // val extras = FragmentNavigatorExtras(tvAppName to "shared_element_container")
-                                        findNavController().navigate(
-                                            OnboardingFragmentDirections.actionOnboardingFragmentToMainFragment()/*, extras*/
-                                        )
+                                        saveAndNavigate(volume, goal)
                                     }
 
                                     override fun onNegativeButtonClick() {
@@ -205,6 +189,8 @@ class OnboardingSetupBattleSettingsFragment :
                                 }
                             )
                         )
+                    } else {
+                        saveAndNavigate(volume, goal)
                     }
                 }
             }
@@ -226,6 +212,26 @@ class OnboardingSetupBattleSettingsFragment :
                 btnDone.isEnabled = it
             }
         }
+    }
+
+    private fun saveAndNavigate(volume: Int, goal: Int) {
+        prefManager.setVal(
+            SharedPreferencesKey.DEFAULT_CONTAINER,
+            container
+        )
+        prefManager.setVal(
+            SharedPreferencesKey.DEFAULT_VOLUME,
+            volume
+        )
+        prefManager.setVal(SharedPreferencesKey.DEFAULT_GOAL, goal)
+        prefManager.setVal(
+            SharedPreferencesKey.IS_FIRST_STARTUP,
+            false
+        )
+        // val extras = FragmentNavigatorExtras(tvAppName to "shared_element_container")
+        parentFragment?.findNavController()?.navigate(
+            OnboardingFragmentDirections.actionOnboardingFragmentToMainFragment()/*, extras*/
+        )
     }
 
     private fun showAlert(title: String, message: String, callBack: () -> Any) {

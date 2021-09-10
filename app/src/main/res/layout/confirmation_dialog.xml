@@ -9,58 +9,52 @@
     android:paddingStart="@dimen/_16sdp"
     android:paddingTop="@dimen/_12sdp"
     android:paddingEnd="@dimen/_16sdp"
-    android:paddingBottom="@dimen/_12sdp"
-    android:theme="@style/Theme.Water">
+    android:paddingBottom="@dimen/_12sdp">
 
     <TextView
         android:id="@+id/tv_title"
-        style="@style/Theme.Water.TextView"
+        style="@style/DialogHeadline"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_16sdp"
         android:gravity="center_horizontal"
         android:textAlignment="center"
-        android:textAllCaps="true"
-        android:textSize="@dimen/_28ssp"
-        app:layout_constraintTop_toTopOf="parent"
         tools:text="@string/placeholder_short" />
 
     <TextView
         android:id="@+id/tv_message"
-        style="@style/Theme.Water.TextView"
+        style="@style/DialogBody"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_16sdp"
+        android:layout_marginBottom="@dimen/_16sdp"
         tools:text="@string/placeholder_long" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_16sdp"
         android:orientation="horizontal">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_positive"
-            style="@style/Theme.Water.RoundedButton"
+            style="@style/RoundedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/_8sdp"
             android:layout_weight="1"
             android:gravity="center_vertical"
             app:icon="@drawable/ic_done"
-            app:iconPadding="@dimen/_8sdp"
-            app:layout_constraintTop_toBottomOf="@id/tv_message" />
+            app:iconPadding="@dimen/_8sdp" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_negative"
-            style="@style/Theme.Water.RoundedButton"
+            style="@style/RoundedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_8sdp"
             android:layout_weight="1"
             android:gravity="center_vertical"
             app:icon="@drawable/ic_cancel"
-            app:iconPadding="@dimen/_8sdp"
-            app:layout_constraintTop_toBottomOf="@id/tv_message" />
+            app:iconPadding="@dimen/_8sdp" />
     </LinearLayout>
 
 

@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
-import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -17,32 +16,7 @@ import me.gndev.water.R
 
 object DialogUtils {
     fun showAlert(
-        context: Context,
-        config: AlertDialogConfig
-    ) {
-        val builder = AlertDialog.Builder(context)
-        builder.setTitle(config.title)
-        builder.setMessage(config.message)
-
-        if (config.positiveButtonConfig.isVisible) {
-            builder.setPositiveButton(config.positiveButtonConfig.title) { _, _ ->
-                config.positiveButtonConfig.onClick()
-            }
-        }
-
-        if (config.negativeButtonConfig.isVisible) {
-            builder.setNegativeButton(config.negativeButtonConfig.title) { _, _ ->
-                config.negativeButtonConfig.onClick()
-            }
-        }
-        builder.show()
-    }
-
-    fun showAlert(
-        context: Context,
-        title: String,
-        message: String,
-        listener: AlertDialogListener? = null
+        context: Context, title: String, message: String, listener: AlertDialogListener? = null
     ) {
         val builder = AlertDialog.Builder(context)
         builder.setTitle(title)
@@ -89,14 +63,6 @@ object DialogUtils {
         dialog.show()
     }
 
-    fun getAlert(context: Context, view: View): AlertDialog {
-        val builder = AlertDialog.Builder(context)
-        builder.setView(view)
-        val alertDialog: AlertDialog = builder.create()
-        alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        return alertDialog
-    }
-
     fun getProgressDialog(context: Context, inflater: LayoutInflater): AlertDialog {
         val builder = AlertDialog.Builder(context)
 
@@ -130,12 +96,12 @@ object DialogUtils {
         btnNegative.text = config.negativeButtonTitle
         btnPositive.setTextColor(
             context.resources.getColor(
-                config.positiveButtonColor ?: R.color.purpleDarker, null
+                config.positiveButtonColor ?: R.color.colorPrimaryDark, null
             )
         )
         btnNegative.setTextColor(
             context.resources.getColor(
-                config.negativeButtonColor ?: R.color.redSecondary, null
+                config.negativeButtonColor ?: R.color.colorSecondary, null
             )
         )
 
@@ -151,7 +117,7 @@ object DialogUtils {
             config.listener?.onNegativeButtonClick()
             alertDialog.dismiss()
         }
-        alertDialog.setOnDismissListener{
+        alertDialog.setOnDismissListener {
             config.listener?.onDismiss()
         }
         alertDialog.show()
@@ -159,16 +125,22 @@ object DialogUtils {
 
     fun getBottomDialog(
         context: Context,
-        @LayoutRes layoutId: Int,
-        inflater: LayoutInflater
+        view: View
     ): BottomSheetDialog {
         val dialog = BottomSheetDialog(context)
-        val customView = inflater.inflate(layoutId, null)
-        dialog.setContentView(customView)
+        dialog.setContentView(view)
         dialog.setOnShowListener {
-            (customView.parent as ViewGroup).background = ColorDrawable(Color.TRANSPARENT)
+            (view.parent as ViewGroup).background = ColorDrawable(Color.TRANSPARENT)
         }
         return dialog
+    }
+
+    private fun getAlert(context: Context, view: View): AlertDialog {
+        val builder = AlertDialog.Builder(context)
+        builder.setView(view)
+        val alertDialog: AlertDialog = builder.create()
+        alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        return alertDialog
     }
 
     /*fun showImagePickerDialog(

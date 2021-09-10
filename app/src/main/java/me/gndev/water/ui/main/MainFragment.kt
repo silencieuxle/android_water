@@ -9,21 +9,27 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import me.gndev.water.R
+import me.gndev.water.core.base.FragmentBase
+import me.gndev.water.core.base.ViewModelBase
 import me.gndev.water.core.constant.ActiveLevel
+import me.gndev.water.core.constant.Container
 import me.gndev.water.core.constant.SharedPreferencesKey
 import me.gndev.water.core.constant.UserSex
-import me.gndev.water.core.constant.Container
-import me.gndev.water.core.base.FragmentBase
 import me.gndev.water.data.entity.Game
 import me.gndev.water.data.entity.Turn
+import me.gndev.water.data.repository.TurnRepository
 import me.gndev.water.databinding.MainFragmentBinding
-import me.gndev.water.ui.onboarding.WeaponDropDownAdapter
 import me.gndev.water.ui.onboarding.ContainerDropdownModel
+import me.gndev.water.ui.onboarding.WeaponDropDownAdapter
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainFragment : FragmentBase<MainViewModel>(R.layout.main_fragment) {
@@ -43,7 +49,6 @@ class MainFragment : FragmentBase<MainViewModel>(R.layout.main_fragment) {
     private var score: Int = 0
     private var sex: String = UserSex.MALE
     private var activeLevel: String = ActiveLevel.MODERATE
-    private var maxVolume: Int = 0
     private var isFirstStartup: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -162,13 +167,15 @@ class MainFragment : FragmentBase<MainViewModel>(R.layout.main_fragment) {
         activeLevel = prefManager.getStringVal(SharedPreferencesKey.ACTIVE_LEVEL, UserSex.MALE)
         isFirstStartup = prefManager.getBooleanVal(SharedPreferencesKey.IS_FIRST_STARTUP, true)
     }
+}
 
-    private fun getSuggestedMaxVolume(): Int {
-        return if (sex == UserSex.MALE) {
-            1
-        } else {
-            2
+@HiltViewModel
+class MainViewModel @Inject constructor(
+    private val turnRepository: TurnRepository
+) : ViewModelBase() {
+    fun saveTurn(turn: Turn) {
+        viewModelScope.launch {
+            turnRepository.insertTurn(turn)
         }
     }
-
 }
