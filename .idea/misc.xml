@@ -9,26 +9,41 @@
         <entry key="..\:/Users/khanh-nhat.nguyen/StudioProjects/android_water/app/src/main/res/drawable-anydpi/ic_default_goal.xml" value="0.3880208333333333" />
         <entry key="..\:/Users/khanh-nhat.nguyen/StudioProjects/android_water/app/src/main/res/drawable-anydpi/ic_default_volume.xml" value="0.3880208333333333" />
         <entry key="..\:/Users/khanh-nhat.nguyen/StudioProjects/android_water/app/src/main/res/drawable-anydpi/ic_done.xml" value="0.3880208333333333" />
+        <entry key="..\:/Users/khanh-nhat.nguyen/StudioProjects/android_water/app/src/main/res/drawable-anydpi/ic_dot.xml" value="0.23114035087719298" />
+        <entry key="..\:/Users/khanh-nhat.nguyen/StudioProjects/android_water/app/src/main/res/drawable-anydpi/ic_goal.xml" value="0.3267543859649123" />
         <entry key="..\:/Users/khanh-nhat.nguyen/StudioProjects/android_water/app/src/main/res/drawable-anydpi/ic_help.xml" value="0.3267543859649123" />
         <entry key="..\:/Users/khanh-nhat.nguyen/StudioProjects/android_water/app/src/main/res/drawable-anydpi/ic_sync.xml" value="0.3267543859649123" />
         <entry key="..\:/Users/khanh-nhat.nguyen/StudioProjects/android_water/app/src/main/res/drawable-anydpi/ic_take_a_shot.xml" value="0.3880208333333333" />
+        <entry key="..\:/Users/khanh-nhat.nguyen/StudioProjects/android_water/app/src/main/res/drawable-anydpi/ic_warning.xml" value="0.3267543859649123" />
         <entry key="..\:/Users/khanh-nhat.nguyen/StudioProjects/android_water/app/src/main/res/drawable-v24/bg_loading_dialog.xml" value="0.225" />
         <entry key="..\:/Users/khanh-nhat.nguyen/StudioProjects/android_water/app/src/main/res/drawable-v24/ic_radio_button_checked.xml" value="0.225" />
         <entry key="..\:/Users/khanh-nhat.nguyen/StudioProjects/android_water/app/src/main/res/drawable-v24/ic_radio_button_unchecked.xml" value="0.225" />
         <entry key="..\:/Users/khanh-nhat.nguyen/StudioProjects/android_water/app/src/main/res/drawable/bg_alert_error_dialog.xml" value="0.225" />
         <entry key="..\:/Users/khanh-nhat.nguyen/StudioProjects/android_water/app/src/main/res/drawable/bg_bottom_dialog.xml" value="0.225" />
         <entry key="..\:/Users/khanh-nhat.nguyen/StudioProjects/android_water/app/src/main/res/drawable/bg_circled_button.xml" value="0.3267543859649123" />
+        <entry key="..\:/Users/khanh-nhat.nguyen/StudioProjects/android_water/app/src/main/res/drawable/bg_dropdown.xml" value="0.3267543859649123" />
+        <entry key="..\:/Users/khanh-nhat.nguyen/StudioProjects/android_water/app/src/main/res/drawable/bg_dropdown_item.xml" value="0.3267543859649123" />
         <entry key="..\:/Users/khanh-nhat.nguyen/StudioProjects/android_water/app/src/main/res/drawable/bg_textinputedittext.xml" value="0.3880208333333333" />
         <entry key="..\:/Users/khanh-nhat.nguyen/StudioProjects/android_water/app/src/main/res/drawable/confirmation_dialog_inset.xml" value="0.225" />
         <entry key="..\:/Users/khanh-nhat.nguyen/StudioProjects/android_water/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.225" />
         <entry key="..\:/Users/khanh-nhat.nguyen/StudioProjects/android_water/app/src/main/res/drawable/ic_water_drop.xml" value="0.3880208333333333" />
         <entry key="..\:/Users/khanh-nhat.nguyen/StudioProjects/android_water/app/src/main/res/drawable/splash_background.xml" value="0.225" />
+        <entry key="..\:/Users/khanh-nhat.nguyen/StudioProjects/android_water/app/src/main/res/layout/alert_dialog.xml" value="0.3131578947368421" />
+        <entry key="..\:/Users/khanh-nhat.nguyen/StudioProjects/android_water/app/src/main/res/layout/bg_dropdown.xml" value="0.3131578947368421" />
+        <entry key="..\:/Users/khanh-nhat.nguyen/StudioProjects/android_water/app/src/main/res/layout/confirmation_dialog.xml" value="0.20219298245614034" />
+        <entry key="..\:/Users/khanh-nhat.nguyen/StudioProjects/android_water/app/src/main/res/layout/dropdown_item.xml" value="0.3131578947368421" />
         <entry key="..\:/Users/khanh-nhat.nguyen/StudioProjects/android_water/app/src/main/res/layout/first_startup_fragment.xml" value="0.5" />
         <entry key="..\:/Users/khanh-nhat.nguyen/StudioProjects/android_water/app/src/main/res/layout/fragment_settings.xml" value="0.75" />
         <entry key="..\:/Users/khanh-nhat.nguyen/StudioProjects/android_water/app/src/main/res/layout/fragment_splash_screen.xml" value="0.371875" />
         <entry key="..\:/Users/khanh-nhat.nguyen/StudioProjects/android_water/app/src/main/res/layout/main_activity.xml" value="0.371875" />
-        <entry key="..\:/Users/khanh-nhat.nguyen/StudioProjects/android_water/app/src/main/res/layout/main_fragment.xml" value="0.371875" />
+        <entry key="..\:/Users/khanh-nhat.nguyen/StudioProjects/android_water/app/src/main/res/layout/main_fragment.xml" value="0.25" />
+        <entry key="..\:/Users/khanh-nhat.nguyen/StudioProjects/android_water/app/src/main/res/layout/onboarding_fragment.xml" value="0.3131578947368421" />
+        <entry key="..\:/Users/khanh-nhat.nguyen/StudioProjects/android_water/app/src/main/res/layout/onboarding_setup_battle_settings_fragment.xml" value="0.25" />
+        <entry key="..\:/Users/khanh-nhat.nguyen/StudioProjects/android_water/app/src/main/res/layout/onboarding_setup_profile_fragment.xml" value="0.25" />
+        <entry key="..\:/Users/khanh-nhat.nguyen/StudioProjects/android_water/app/src/main/res/layout/onboarding_welcome_fragment.xml" value="0.25" />
         <entry key="..\:/Users/khanh-nhat.nguyen/StudioProjects/android_water/app/src/main/res/layout/settings_fragment.xml" value="0.3131578947368421" />
+        <entry key="..\:/Users/khanh-nhat.nguyen/StudioProjects/android_water/app/src/main/res/layout/setup_fragment.xml" value="0.30512820512820515" />
+        <entry key="..\:/Users/khanh-nhat.nguyen/StudioProjects/android_water/app/src/main/res/layout/snackbar.xml" value="0.30512820512820515" />
         <entry key="..\:/Users/khanh-nhat.nguyen/StudioProjects/android_water/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.225" />
         <entry key="..\:/Users/khanh-nhat.nguyen/StudioProjects/android_water/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.225" />
         <entry key="..\:/Users/khanh-nhat.nguyen/StudioProjects/android_water/app/src/main/res/xml/root_preferences.xml" value="0.3131578947368421" />
@@ -62,7 +77,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-        <option name="scale" value="0.371875" />
+        <option name="scale" value="0.18" />
       </ProjectState>
     </option>
   </component>

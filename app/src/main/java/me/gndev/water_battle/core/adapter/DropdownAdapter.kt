@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.annotation.LayoutRes
 import me.gndev.water_battle.R
-import me.gndev.water_battle.core.model.DropdownModelBase
+import me.gndev.water_battle.core.base.DropdownModelBase
 
 abstract class DropdownAdapter<T : DropdownModelBase>(
     private val c: Context,

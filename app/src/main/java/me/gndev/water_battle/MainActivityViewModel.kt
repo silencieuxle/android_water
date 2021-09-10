@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import me.gndev.water_battle.core.model.DataResult
-import me.gndev.water_battle.core.model.ViewModelBase
+import me.gndev.water_battle.core.base.ViewModelBase
 import me.gndev.water_battle.data.entity.Game
 import me.gndev.water_battle.data.repository.GameRepository
 import me.gndev.water_battle.util.DateTimeUtils

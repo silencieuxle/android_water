@@ -8,8 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import me.gndev.water_battle.R
 
@@ -59,23 +61,28 @@ object DialogUtils {
     fun showAlertDialog(
         context: Context,
         layoutInflater: LayoutInflater,
+        @DrawableRes icon: Int? = null,
         title: String,
         message: String,
         btnTitle: String? = null,
-        callBack: () -> Unit?
+        callBack: () -> Any?
     ) {
         val view = layoutInflater.inflate(R.layout.alert_dialog, null)
         val dialog = getAlert(context, view)
-        val tvTitle = view.findViewById<TextView>(R.id.tvTitle)
-        val tvContent = view.findViewById<TextView>(R.id.tvContent)
-        val btn = view.findViewById<TextView>(R.id.btnContinue)
+        val tvTitle = view.findViewById<TextView>(R.id.tv_title)
+        val tvContent = view.findViewById<TextView>(R.id.tv_message)
+        val btnContinue = view.findViewById<TextView>(R.id.btn_continue)
         if (btnTitle != null) {
-            btn.text = btnTitle
+            btnContinue.text = btnTitle
+        }
+
+        if (icon != null) {
+            tvTitle.setCompoundDrawables(ContextCompat.getDrawable(context, icon), null, null, null)
         }
 
         tvTitle.text = title
         tvContent.text = message
-        btn.setOnClickListener {
+        btnContinue.setOnClickListener {
             dialog.dismiss()
             callBack()
         }
@@ -104,15 +111,14 @@ object DialogUtils {
         return alertDialog
     }
 
-
-    /*fun showConfirmationDialog(
+    fun showConfirmationDialog(
         context: Context,
         inflater: LayoutInflater,
         config: ConfirmationDialogConfig
     ) {
         val builder = AlertDialog.Builder(context)
 
-        val dialogView: View = inflater.inflate(R.layout.dialog_confirmation, null)
+        val dialogView: View = inflater.inflate(R.layout.confirmation_dialog, null)
         builder.setView(dialogView)
 
         val btnPositive = dialogView.findViewById<TextView>(R.id.btn_positive)
@@ -124,12 +130,12 @@ object DialogUtils {
         btnNegative.text = config.negativeButtonTitle
         btnPositive.setTextColor(
             context.resources.getColor(
-                config.positiveButtonColor ?: R.color.colorAccent, null
+                config.positiveButtonColor ?: R.color.purpleDarker, null
             )
         )
         btnNegative.setTextColor(
             context.resources.getColor(
-                config.negativeButtonColor ?: R.color.red, null
+                config.negativeButtonColor ?: R.color.redSecondary, null
             )
         )
 
@@ -146,7 +152,7 @@ object DialogUtils {
             alertDialog.dismiss()
         }
         alertDialog.show()
-    }*/
+    }
 
     fun getBottomDialog(
         context: Context,
@@ -233,8 +239,7 @@ object DialogUtils {
         }
 
         dialog.show()
-    }*/
-
+    }
 
     interface DialogImagePickerListener {
         fun onCameraClicked()
@@ -242,26 +247,12 @@ object DialogUtils {
         fun onUseLogoAsAvatarClicked()
         fun onDeleteClicked()
         fun ctrUnUseLogoAsAvatar()
-    }
-
-    interface DialogContactSupportListener {
-        fun onClickPhoneNo()
-        fun onClickEmail()
-    }
-
-    interface DialogEmailNotVerifyListener {
-        fun onOpenMailApp()
-        fun onResendEmail()
-    }
+    }*/
 
     interface AlertDialogListener {
         fun onPositiveButtonClick()
         fun onNegativeButtonClick()
         fun onDismiss()
-    }
-
-    interface BottomAlertIncreaseIdLevelListener {
-        fun onButtonClick()
     }
 
     interface AlertDialogButtonConfig {
@@ -276,8 +267,6 @@ object DialogUtils {
         var positiveButtonConfig: AlertDialogButtonConfig,
         var negativeButtonConfig: AlertDialogButtonConfig
     )
-
-    data class PasswordHelpCriteriaConfig(var title: String = "", var isFailed: Boolean = false)
 
     open class SingleConfirmDialogConfig(
         open var title: String? = null,

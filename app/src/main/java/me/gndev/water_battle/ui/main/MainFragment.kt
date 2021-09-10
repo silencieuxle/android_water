@@ -8,6 +8,7 @@ import android.widget.AutoCompleteTextView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
@@ -17,12 +18,12 @@ import me.gndev.water_battle.core.constant.ActiveLevel
 import me.gndev.water_battle.core.constant.SharedPreferencesKey
 import me.gndev.water_battle.core.constant.UserSex
 import me.gndev.water_battle.core.constant.Weapon
-import me.gndev.water_battle.core.model.FragmentBase
+import me.gndev.water_battle.core.base.FragmentBase
 import me.gndev.water_battle.data.entity.Game
 import me.gndev.water_battle.data.entity.Turn
 import me.gndev.water_battle.databinding.MainFragmentBinding
-import me.gndev.water_battle.ui.first_startup.WeaponDropDownAdapter
-import me.gndev.water_battle.ui.first_startup.WeaponDropdownModel
+import me.gndev.water_battle.ui.onboarding.WeaponDropDownAdapter
+import me.gndev.water_battle.ui.onboarding.WeaponDropdownModel
 
 @AndroidEntryPoint
 class MainFragment : FragmentBase<MainViewModel>(R.layout.main_fragment) {
@@ -88,7 +89,9 @@ class MainFragment : FragmentBase<MainViewModel>(R.layout.main_fragment) {
             )
         actvWeapon.setAdapter(weaponListAdapter)
         actvWeapon.setText(weapon, false)
-
+        actvWeapon.setDropDownBackgroundDrawable(
+            ContextCompat.getDrawable(requireContext(), R.drawable.bg_dropdown)
+        )
         actvWeapon.setOnItemClickListener { adapterView, _, i, _ ->
             val selectedItem = adapterView.getItemAtPosition(i) as WeaponDropdownModel
             weapon = selectedItem.value

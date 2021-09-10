@@ -1,4 +1,4 @@
-package me.gndev.water_battle.core.model
+package me.gndev.water_battle.core.base
 
 import androidx.lifecycle.ViewModel
 import me.gndev.water_battle.core.event.ErrorLiveEvent

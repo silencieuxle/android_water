@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="radius_small">4dp</dimen>
-    <dimen name="radius_medium">16dp</dimen>
-    <dimen name="radius_large">20dp</dimen>
-    <dimen name="text_margin">16dp</dimen>
+    <dimen name="radius_small">@dimen/_4sdp</dimen>
+    <dimen name="radius_medium">@dimen/_16sdp</dimen>
+    <dimen name="radius_large">@dimen/_20sdp</dimen>
 </resources>

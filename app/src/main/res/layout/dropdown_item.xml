@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/tv_dropdown_item_text"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp"
-    android:textFontWeight="800"
-    tools:text="@string/placeholder_short" />
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_dropdown_item_text"
+        style="@style/Theme.Water.TextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_dropdown_item"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:padding="@dimen/_12sdp"
+        android:singleLine="true"
+        tools:text="@string/placeholder_short" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_2sdp"
+        android:background="@android:color/transparent"/>
+</LinearLayout>

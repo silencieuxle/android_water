@@ -32,15 +32,36 @@
         android:layout_marginTop="@dimen/_16sdp"
         tools:text="@string/placeholder_long" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_continue"
-        style="@style/Theme.Water.RoundedButton"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/_16sdp"
-        app:icon="@drawable/ic_done"
-        app:iconPadding="@dimen/_8sdp"
-        app:layout_constraintTop_toBottomOf="@id/tv_message" />
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_positive"
+            style="@style/Theme.Water.RoundedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            app:icon="@drawable/ic_done"
+            app:iconPadding="@dimen/_8sdp"
+            app:layout_constraintTop_toBottomOf="@id/tv_message" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_negative"
+            style="@style/Theme.Water.RoundedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            app:icon="@drawable/ic_cancel"
+            app:iconPadding="@dimen/_8sdp"
+            app:layout_constraintTop_toBottomOf="@id/tv_message" />
+    </LinearLayout>
+
 
 </LinearLayout>

@@ -15,17 +15,18 @@
             app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
-        android:id="@+id/firstStartupFragment"
-        android:name="me.gndev.water_battle.ui.first_startup.FirstStartupFragment"
-        android:label="first_startup_fragment"
-        tools:layout="@layout/first_startup_fragment">
-        <action
-            android:id="@+id/action_firstStartupFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/settingsFragment"
         android:name="me.gndev.water_battle.ui.settings.SettingsFragment"
         android:label="SettingsFragment"
         tools:layout="@layout/settings_fragment" />
+
+    <fragment
+        android:id="@+id/onboardingFragment"
+        android:name="me.gndev.water_battle.ui.onboarding.OnboardingFragment"
+        android:label="OnboardingFragment"
+        tools:layout="@layout/onboarding_fragment" >
+        <action
+            android:id="@+id/action_onboardingFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
 </navigation>

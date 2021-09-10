@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:theme="@style/Theme.Water"
+    android:transitionGroup="true"
+    tools:background="@color/purpleLighter"
+    tools:context=".ui.onboarding.OnboardingWelcomeFragment">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_72sdp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/_32sdp"
+        android:src="@drawable/ic_water_drop"
+        android:contentDescription="@string/image_general_description" />
+
+    <TextView
+        style="@style/Theme.Water.TextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginBottom="@dimen/_32sdp"
+        android:gravity="center_horizontal"
+        android:text="Welcome to Water Battle"
+        android:textAllCaps="true"
+        android:textSize="@dimen/_32ssp" />
+
+    <TextView
+        style="@style/Theme.Water.TextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_horizontal"
+        android:text="Swipe left to continue >>>"
+        android:textAllCaps="true" />
+
+</LinearLayout>

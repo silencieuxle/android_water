@@ -1,25 +1,33 @@
-package me.gndev.water_battle.core.model
+package me.gndev.water_battle.core.base
 
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
+import android.widget.Toast.*
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.createViewModelLazy
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.MaterialContainerTransform
+import com.google.android.material.transition.MaterialElevationScale
+import me.gndev.water_battle.MainActivity
 import me.gndev.water_battle.MainActivityViewModel
+import me.gndev.water_battle.R
 import me.gndev.water_battle.data.share_preferences.PrefManager
 import me.gndev.water_battle.util.DialogUtils
 import java.lang.reflect.ParameterizedType
 import javax.inject.Inject
 import kotlin.reflect.KClass
+
 
 abstract class FragmentBase<TViewModel : ViewModelBase>(@LayoutRes contentLayoutId: Int) :
     Fragment(contentLayoutId) {
@@ -33,7 +41,8 @@ abstract class FragmentBase<TViewModel : ViewModelBase>(@LayoutRes contentLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        exitTransition = MaterialElevationScale(/* growing= */ true)
+        reenterTransition = MaterialElevationScale(/* growing= */ true)
         sharedElementEnterTransition = MaterialContainerTransform()
     }
 
@@ -64,12 +73,16 @@ abstract class FragmentBase<TViewModel : ViewModelBase>(@LayoutRes contentLayout
         requireActivity().onBackPressedDispatcher.addCallback(
             viewLifecycleOwner,
             object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
+                override fun handleOnBackPressed() {    
                     if (!findNavController().popBackStack()) {
                         activity?.finish()
                     }
                 }
             })
+    }
+
+    open fun showSnackBar(message: String, duration: Int) {
+        (requireActivity() as MainActivity).showSnackBar(message, duration)
     }
 
     abstract fun setupActionBar()

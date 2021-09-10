@@ -1,9 +1,9 @@
-package me.gndev.water_battle.ui.first_startup
+package me.gndev.water_battle.ui.onboarding
 
 import android.content.Context
 import androidx.annotation.LayoutRes
 import me.gndev.water_battle.core.adapter.DropdownAdapter
-import me.gndev.water_battle.core.model.DropdownModelBase
+import me.gndev.water_battle.core.base.DropdownModelBase
 
 class WeaponDropDownAdapter(
     context: Context,
