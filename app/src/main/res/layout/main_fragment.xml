@@ -16,7 +16,6 @@
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_40sdp"
         android:layout_marginTop="@dimen/_24sdp"
-        app:cornerRadius="@dimen/_50sdp"
         app:icon="@drawable/ic_setting"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -49,18 +48,17 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_container"
-                style="@style/DropdownInputLayout"
+                style="@style/TextInputLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
                 android:layout_marginEnd="@dimen/_8sdp"
                 android:layout_weight="1"
-                android:dropDownVerticalOffset="@dimen/_4sdp"
                 android:hint="@string/container"
                 app:endIconDrawable="@drawable/ic_dropdown">
 
-                <AutoCompleteTextView
-                    android:id="@+id/actv_container"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tiet_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"

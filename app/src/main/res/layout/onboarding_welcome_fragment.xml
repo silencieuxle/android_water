@@ -20,7 +20,7 @@
         android:src="@drawable/ic_water_drop" />
 
     <TextView
-        style="@style/OnboardingHeadline"
+        style="@style/ViewHeadline"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"

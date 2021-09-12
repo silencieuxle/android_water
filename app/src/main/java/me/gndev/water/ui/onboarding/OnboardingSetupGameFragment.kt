@@ -4,13 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AutoCompleteTextView
 import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
@@ -18,6 +19,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.combine
 import me.gndev.water.R
+import me.gndev.water.component.DataSelectBottomSheet
 import me.gndev.water.core.base.FragmentBase
 import me.gndev.water.core.base.ViewModelBase
 import me.gndev.water.core.constant.Container
@@ -37,11 +39,30 @@ class OnboardingSetupBattleSettingsFragment :
     private val binding get() = _binding!!
 
     private lateinit var btnDone: Button
-    private lateinit var actvContainer: AutoCompleteTextView
-    private lateinit var tietVolume: TextInputEditText
-    private lateinit var tietGoal: TextInputEditText
+    private lateinit var tietContainer: TextView
+    private lateinit var tietVolume: EditText
+    private lateinit var tietGoal: EditText
 
     private var container: String = ""
+    private val containerList = listOf(
+        DataSelectBottomSheet.SelectorItem(Container.CUP, Container.CUP, false),
+        DataSelectBottomSheet.SelectorItem(Container.BOTTLE, Container.BOTTLE, false),
+        DataSelectBottomSheet.SelectorItem(Container.CAN, Container.CAN, false),
+        DataSelectBottomSheet.SelectorItem(Container.TANK, Container.TANK, false)
+    )
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setFragmentResultListener(DataSelectBottomSheet.CONTAINER_SELECTED) { _, bundle ->
+            val selectedContainer =
+                bundle.getString(DataSelectBottomSheet.SELECTED_CONTAINER_ID)
+            if (selectedContainer?.isNotEmpty() == true) {
+                container = selectedContainer
+                tietContainer.text = containerList.find { x -> x.value == container }?.text
+            }
+        }
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,39 +77,25 @@ class OnboardingSetupBattleSettingsFragment :
     }
 
     override fun setupViews() {
-        btnDone = binding.btnDone
         val sex = prefManager.getStringVal(SharedPreferencesKey.USER_SEX, UserSex.MALE)
         val age = prefManager.getIntVal(SharedPreferencesKey.USER_AGE, 9)
+        container = prefManager.getStringVal(SharedPreferencesKey.DEFAULT_CONTAINER, Container.CUP)
         val recommendedGoal = GoalHelper.getRecommendedGoal(age, sex)
-        val weaponListAdapter =
-            WeaponDropDownAdapter(
-                requireContext(), R.layout.dropdown_item, listOf(
-                    ContainerDropdownModel("Cup", Container.CUP),
-                    ContainerDropdownModel(
-                        "Bottle",
-                        Container.BOTTLE
-                    ),
-                    ContainerDropdownModel("Can", Container.CAN),
-                    ContainerDropdownModel("Tank", Container.TANK)
-                )
-            )
-        actvContainer = binding.actvContainer.apply {
+
+        btnDone = binding.btnDone
+        tietContainer = binding.tietContainer.apply {
             addTextChangedListener {
                 if (it != null) viewModel.setContainer(if (it.isEmpty()) "" else it.toString())
             }
-            setText(
-                prefManager.getStringVal(SharedPreferencesKey.DEFAULT_CONTAINER, Container.CUP), false
-            )
-            setDropDownBackgroundDrawable(
-                androidx.core.content.ContextCompat.getDrawable(
-                    requireContext(),
-                    R.drawable.bg_dropdown
-                )
-            )
-            setOnItemClickListener { adapterView, _, i, _ ->
-                val selectedItem = adapterView.getItemAtPosition(i) as ContainerDropdownModel
-                container = selectedItem.value
-                actvContainer.setText(selectedItem.text)
+            text = container
+
+            setOnClickListener {
+                containerList.forEach { x ->
+                    x.isChecked = x.value == container
+                }
+
+                val bottomSheet = DataSelectBottomSheet(containerList)
+                bottomSheet.show(parentFragmentManager, null)
             }
             setOnFocusChangeListener { _, hasFocus ->
                 if (hasFocus) showSnackBar(
@@ -100,7 +107,6 @@ class OnboardingSetupBattleSettingsFragment :
                     Snackbar.LENGTH_SHORT
                 )
             }
-            setAdapter(weaponListAdapter)
         }
         tietVolume = binding.tietVolume.apply {
             addTextChangedListener {
@@ -140,11 +146,11 @@ class OnboardingSetupBattleSettingsFragment :
 
         btnDone.setOnClickListener {
             when {
-                actvContainer.text.isNullOrEmpty() -> {
+                tietContainer.text.isNullOrEmpty() -> {
                     showAlert(
                         getString(R.string.warning),
                         getString(R.string.alert_message_missing_container)
-                    ) { actvContainer.requestFocus() }
+                    )
                 }
                 tietVolume.text.isNullOrEmpty() -> {
                     showAlert(
@@ -199,8 +205,8 @@ class OnboardingSetupBattleSettingsFragment :
 
     override fun subscribeObservers() {
         lifecycleScope.launchWhenResumed {
-            if (actvContainer.text != null) viewModel.setContainer(
-                if (actvContainer.text!!.isEmpty()) "" else actvContainer.text.toString()
+            if (tietContainer.text != null) viewModel.setContainer(
+                if (tietContainer.text!!.isEmpty()) "" else tietContainer.text.toString()
             )
             if (tietVolume.text != null) viewModel.setVolume(
                 if (tietVolume.text!!.isEmpty()) 0 else tietVolume.text.toString().toInt()
@@ -234,7 +240,7 @@ class OnboardingSetupBattleSettingsFragment :
         )
     }
 
-    private fun showAlert(title: String, message: String, callBack: () -> Any) {
+    private fun showAlert(title: String, message: String, callBack: (() -> Any?)? = null) {
         DialogUtils.showAlertDialog(
             requireContext(),
             layoutInflater,

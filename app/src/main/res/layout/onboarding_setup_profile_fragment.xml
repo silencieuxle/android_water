@@ -12,7 +12,7 @@
     tools:context=".ui.onboarding.OnboardingSetupProfileFragment">
 
     <TextView
-        style="@style/OnboardingHeadline"
+        style="@style/ViewHeadline"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -23,13 +23,12 @@
         android:id="@+id/til_name"
         style="@style/TextInputLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_gravity="center_vertical">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tiet_name"
+            style="@style/TextInputLayout.TextInputEditText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:hint="@string/your_name"
             android:inputType="textCapWords"
             android:maxLines="1" />
@@ -51,10 +50,12 @@
             android:gravity="center"
             android:text="@string/sex"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/rbg"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <RadioGroup
+            android:id="@+id/rbg"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="horizontal"
@@ -93,6 +94,7 @@
             app:icon="@drawable/ic_help"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/rbg"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -108,15 +110,14 @@
             android:id="@+id/til_age"
             style="@style/TextInputLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginEnd="@dimen/_4sdp"
             android:layout_weight="1">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tiet_age"
+                style="@style/TextInputLayout.TextInputEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:gravity="center"
                 android:hint="@string/age"
                 android:inputType="number"
@@ -127,7 +128,6 @@
             android:id="@+id/til_height"
             style="@style/TextInputLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginStart="@dimen/_4sdp"
             android:layout_marginEnd="@dimen/_4sdp"
@@ -135,8 +135,8 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tiet_height"
+                style="@style/TextInputLayout.TextInputEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:gravity="center"
                 android:hint="@string/height"
                 android:inputType="number"
@@ -147,15 +147,14 @@
             android:id="@+id/til_weight"
             style="@style/TextInputLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginStart="@dimen/_4sdp"
             android:layout_weight="1">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tiet_weight"
+                style="@style/TextInputLayout.TextInputEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:gravity="center"
                 android:hint="@string/weight"
                 android:inputType="number"

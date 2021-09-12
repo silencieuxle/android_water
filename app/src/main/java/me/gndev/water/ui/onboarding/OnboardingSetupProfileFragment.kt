@@ -144,7 +144,7 @@ class OnboardingSetupProfileFragment @Inject constructor() :
 
         btnSexHelp = binding.btnSexHelp.apply {
             setOnClickListener {
-                val view = layoutInflater.inflate(R.layout.sex_help_bottom_sheet, null)
+                val view = layoutInflater.inflate(R.layout.information_bottom_sheet, null)
                 view.findViewById<TextView>(R.id.tv_title).text =
                     context.getString(R.string.sex_help_title)
                 view.findViewById<TextView>(R.id.tv_message).text =

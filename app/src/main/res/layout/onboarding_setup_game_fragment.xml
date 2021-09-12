@@ -14,7 +14,7 @@
 
     <TextView
         android:id="@+id/tv_header"
-        style="@style/OnboardingHeadline"
+        style="@style/ViewHeadline"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
@@ -38,40 +38,29 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_container"
-            style="@style/DropdownInputLayout"
+        <TextView
+            style="@style/TextView.Clickable"
+            android:id="@+id/tiet_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:gravity="center"
             android:layout_marginEnd="@dimen/_4sdp"
             android:layout_weight="1"
-            app:endIconDrawable="@drawable/ic_dropdown">
-
-            <AutoCompleteTextView
-                android:id="@+id/actv_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:dropDownVerticalOffset="@dimen/_3sdp"
-                android:gravity="center"
-                android:hint="@string/container"
-                android:inputType="none" />
-        </com.google.android.material.textfield.TextInputLayout>
+            android:hint="@string/container" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_volume"
             style="@style/TextInputLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginStart="@dimen/_4sdp"
             android:layout_marginEnd="@dimen/_4sdp"
             android:layout_weight="1">
 
             <com.google.android.material.textfield.TextInputEditText
+                style="@style/TextInputLayout.TextInputEditText"
                 android:id="@+id/tiet_volume"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:gravity="center"
                 android:hint="@string/volume"
                 android:inputType="number"
@@ -82,15 +71,14 @@
             android:id="@+id/til_goal"
             style="@style/TextInputLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginStart="@dimen/_4sdp"
             android:layout_weight="1">
 
             <com.google.android.material.textfield.TextInputEditText
+                style="@style/TextInputLayout.TextInputEditText"
                 android:id="@+id/tiet_goal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:gravity="center"
                 android:hint="@string/goal"
                 android:inputType="number"

@@ -2,12 +2,18 @@
 
     <style name="TextView" />
 
+    <style name="TextView.Clickable">
+        <item name="android:layout_height">@dimen/_40sdp</item>
+        <item name="android:background">@drawable/bg_clickable_textview</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+
     <style name="Headline">
         <item name="android:textFontWeight">500</item>
         <item name="android:textAllCaps">true</item>
     </style>
 
-    <style name="OnboardingHeadline" parent="Headline">
+    <style name="ViewHeadline" parent="Headline">
         <item name="android:textSize">@dimen/_32sdp</item>
     </style>
 
@@ -45,8 +51,10 @@
         <item name="android:textAllCaps">true</item>
     </style>
 
-    <style name="TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+    <style name="TextInputLayout">
+        <item name="android:backgroundTint">?attr/colorSurface</item>
         <item name="android:layout_marginBottom">@dimen/_16sdp</item>
+        <item name="android:layout_height">@dimen/_40sdp</item>
         <item name="boxCornerRadiusBottomEnd">@dimen/_50sdp</item>
         <item name="boxCornerRadiusBottomStart">@dimen/_50sdp</item>
         <item name="boxCornerRadiusTopEnd">@dimen/_50sdp</item>
@@ -54,14 +62,21 @@
         <item name="boxStrokeColor">@android:color/transparent</item>
         <item name="boxStrokeWidthFocused">0dp</item>
         <item name="boxStrokeWidth">0dp</item>
+        <item name="endIconTint">@color/colorPrimary</item>
         <item name="startIconTint">@color/colorPrimary</item>
     </style>
+
+    <style name="TextInputLayout.TextInputEditText" parent="">
+        <item name="android:backgroundTint">?attr/colorSurface</item>
+        <item name="android:layout_height">@dimen/_40sdp</item>
+    </style>>
 
     <style name="DropdownInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu">
         <item name="android:layout_marginBottom">@dimen/_16sdp</item>
         <item name="boxCornerRadiusBottomEnd">@dimen/_50sdp</item>
         <item name="boxCornerRadiusBottomStart">@dimen/_50sdp</item>
         <item name="boxCornerRadiusTopEnd">@dimen/_50sdp</item>
+        <item name="android:layout_height">@dimen/_40sdp</item>
         <item name="boxCornerRadiusTopStart">@dimen/_50sdp</item>
         <item name="boxStrokeColor">@android:color/transparent</item>
         <item name="boxStrokeWidthFocused">0dp</item>
@@ -78,12 +93,10 @@
 
     <style name="CircledIconButton">
         <item name="iconPadding">0dp</item>
+        <item name="cornerRadius">@dimen/radius_circled</item>
         <item name="android:insetTop">0dp</item>
         <item name="android:insetBottom">0dp</item>
-        <item name="android:paddingStart">@dimen/_12sdp</item>
-        <item name="android:paddingEnd">@dimen/_12sdp</item>
-        <item name="android:paddingTop">@dimen/_12sdp</item>
-        <item name="android:paddingBottom">@dimen/_12sdp</item>
+        <item name="android:padding">@dimen/_12sdp</item>
         <item name="android:minWidth">@dimen/_12sdp</item>
         <item name="android:minHeight">@dimen/_12sdp</item>
         <item name="iconGravity">textStart</item>
@@ -91,15 +104,15 @@
     </style>
 
     <style name="RoundedButton">
-        <item name="android:backgroundTint">?attr/colorPrimaryVariant</item>
+        <item name="android:backgroundTint">@color/button_states</item>
         <item name="iconTint">?attr/colorOnPrimary</item>
         <item name="tintMode">src_in</item>
         <item name="iconPadding">@dimen/_8sdp</item>
         <item name="android:textColor">?attr/colorOnPrimary</item>
-        <item name="android:paddingTop">@dimen/_8sdp</item>
         <item name="android:paddingBottom">@dimen/_8sdp</item>
-        <item name="android:paddingStart">@dimen/_12sdp</item>
-        <item name="android:paddingEnd">@dimen/_12sdp</item>
+        <item name="android:paddingTop">@dimen/_8sdp</item>
+        <item name="android:paddingLeft">@dimen/_24sdp</item>
+        <item name="android:paddingRight">@dimen/_24sdp</item>
         <item name="cornerRadius">@dimen/radius_large</item>
     </style>
 
@@ -123,5 +136,13 @@
     <style name="SettingsItemSummary">
         <item name="android:textSize">@dimen/_12ssp</item>
         <item name="android:textColor">@color/teal_700</item>
+    </style>
+
+    <style name="BottomSheetDialog" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottomSheetModal</item>
+    </style>
+
+    <style name="BottomSheetModal" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
     </style>
 </resources>

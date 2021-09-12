@@ -90,7 +90,7 @@ class BiometricService @Inject constructor(
                             ) {
                                 Toast.makeText(context, R.string.bio_auth_error, Toast.LENGTH_SHORT)
                                     .show()
-                                prefManager.setVal(SharedPreferencesKey.BIO_AUTH_ENABLED, false)
+                                prefManager.setVal(SharedPreferencesKey.USE_BIO, false)
                             }
 
                             override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
@@ -99,7 +99,7 @@ class BiometricService @Inject constructor(
                                     R.string.bio_auth_success,
                                     Toast.LENGTH_SHORT
                                 ).show()
-                                prefManager.setVal(SharedPreferencesKey.BIO_AUTH_ENABLED, true)
+                                prefManager.setVal(SharedPreferencesKey.USE_BIO, true)
                             }
 
                             override fun onAuthenticationFailed() {
@@ -108,13 +108,13 @@ class BiometricService @Inject constructor(
                                     R.string.bio_auth_failed,
                                     Toast.LENGTH_SHORT
                                 ).show()
-                                prefManager.setVal(SharedPreferencesKey.BIO_AUTH_ENABLED, false)
+                                prefManager.setVal(SharedPreferencesKey.USE_BIO, false)
                             }
                         }).authenticate(promptInfo)
                     }
 
                     override fun onNegativeButtonClick() {
-                        prefManager.setVal(SharedPreferencesKey.BIO_AUTH_ENABLED, false)
+                        prefManager.setVal(SharedPreferencesKey.USE_BIO, false)
                     }
                 })
         } else {

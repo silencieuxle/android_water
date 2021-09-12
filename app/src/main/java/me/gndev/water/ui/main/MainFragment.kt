@@ -4,11 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AutoCompleteTextView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
-import androidx.core.content.ContextCompat
+import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.button.MaterialButton
@@ -17,6 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import me.gndev.water.R
+import me.gndev.water.component.DataSelectBottomSheet
 import me.gndev.water.core.base.FragmentBase
 import me.gndev.water.core.base.ViewModelBase
 import me.gndev.water.core.constant.ActiveLevel
@@ -27,8 +27,6 @@ import me.gndev.water.data.entity.Game
 import me.gndev.water.data.entity.Turn
 import me.gndev.water.data.repository.TurnRepository
 import me.gndev.water.databinding.MainFragmentBinding
-import me.gndev.water.ui.onboarding.ContainerDropdownModel
-import me.gndev.water.ui.onboarding.WeaponDropDownAdapter
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -38,7 +36,7 @@ class MainFragment : FragmentBase<MainViewModel>(R.layout.main_fragment) {
 
     private lateinit var btnTakeAShot: MaterialButton
     private lateinit var btnSettings: MaterialButton
-    private lateinit var actvContainer: AutoCompleteTextView
+    private lateinit var tietContainer: TextInputEditText
     private lateinit var tietVolume: TextInputEditText
     private lateinit var tvScore: TextView
     private lateinit var currentGame: Game
@@ -54,6 +52,14 @@ class MainFragment : FragmentBase<MainViewModel>(R.layout.main_fragment) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setVarValue()
+        setFragmentResultListener(DataSelectBottomSheet.CONTAINER_SELECTED) { _, bundle ->
+            val selectedContainer = bundle.getString(DataSelectBottomSheet.SELECTED_CONTAINER_ID)
+            if (selectedContainer?.isNotEmpty() == true) {
+                container = selectedContainer
+                tietContainer.setText(container)
+            }
+        }
+
     }
 
     override fun onCreateView(
@@ -81,26 +87,20 @@ class MainFragment : FragmentBase<MainViewModel>(R.layout.main_fragment) {
         btnSettings = binding.btnSettings
         tvScore = binding.tvScore
         tietVolume = binding.tietVolume
-        actvContainer = binding.actvContainer
+        tietContainer = binding.tietContainer
 
-        val weaponListAdapter =
-            WeaponDropDownAdapter(
-                requireContext(), R.layout.dropdown_item, listOf(
-                    ContainerDropdownModel(Container.CUP, Container.CUP),
-                    ContainerDropdownModel(Container.BOTTLE, Container.BOTTLE),
-                    ContainerDropdownModel(Container.CAN, Container.CAN),
-                    ContainerDropdownModel(Container.TANK, Container.TANK)
-                )
+        tietContainer.setText(container)
+
+        tietContainer.setOnClickListener {
+            val containerList = listOf(
+                DataSelectBottomSheet.SelectorItem("Cup", Container.CUP, false),
+                DataSelectBottomSheet.SelectorItem("Bottle", Container.BOTTLE, false),
+                DataSelectBottomSheet.SelectorItem("Can", Container.CAN, false),
+                DataSelectBottomSheet.SelectorItem("Tank", Container.TANK, false)
             )
-        actvContainer.setAdapter(weaponListAdapter)
-        actvContainer.setText(container, false)
-        actvContainer.setDropDownBackgroundDrawable(
-            ContextCompat.getDrawable(requireContext(), R.drawable.bg_dropdown)
-        )
-        actvContainer.setOnItemClickListener { adapterView, _, i, _ ->
-            val selectedItem = adapterView.getItemAtPosition(i) as ContainerDropdownModel
-            container = selectedItem.value
-            actvContainer.setText(selectedItem.text)
+            containerList.find { x -> x.value == container }?.isChecked = true
+            val modalBottomSheet = DataSelectBottomSheet(containerList)
+            modalBottomSheet.show(parentFragmentManager, null)
         }
         tietVolume.setText(volume.toString()) // passing Int to setText will cause the view to find the resource Id
 

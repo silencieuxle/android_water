@@ -11,6 +11,7 @@ import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import me.gndev.water.R
 
@@ -39,7 +40,7 @@ object DialogUtils {
         title: String,
         message: String,
         btnTitle: String? = null,
-        callBack: () -> Any?
+        callBack: (() -> Any?)? = null
     ) {
         val view = layoutInflater.inflate(R.layout.alert_dialog, null)
         val dialog = getAlert(context, view)
@@ -58,7 +59,7 @@ object DialogUtils {
         tvContent.text = message
         btnContinue.setOnClickListener {
             dialog.dismiss()
-            callBack()
+            callBack?.invoke()
         }
         dialog.show()
     }
@@ -131,7 +132,10 @@ object DialogUtils {
         dialog.setContentView(view)
         dialog.setOnShowListener {
             (view.parent as ViewGroup).background = ColorDrawable(Color.TRANSPARENT)
+            val layout = (it as BottomSheetDialog).findViewById<View>(R.id.ll_bottom_sheet)
+            BottomSheetBehavior.from(layout!!).setState(BottomSheetBehavior.STATE_EXPANDED)
         }
+
         return dialog
     }
 

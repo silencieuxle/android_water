@@ -3,4 +3,5 @@
     <dimen name="radius_small">@dimen/_4sdp</dimen>
     <dimen name="radius_medium">@dimen/_16sdp</dimen>
     <dimen name="radius_large">@dimen/_20sdp</dimen>
+    <dimen name="radius_circled">@dimen/_50sdp</dimen>
 </resources>

@@ -8,9 +8,9 @@ import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.annotation.LayoutRes
 import me.gndev.water.R
-import me.gndev.water.core.base.DropdownModelBase
+import me.gndev.water.core.base.DataSelectModelBase
 
-abstract class DropdownAdapter<T : DropdownModelBase>(
+abstract class DropdownAdapter<T : DataSelectModelBase>(
     private val c: Context,
     @LayoutRes val rl: Int,
     private val ds: List<T>

@@ -1,7 +1,6 @@
 package me.gndev.water.core.constant
 
 object SharedPreferencesKey {
-
     // User preference keys
     const val USER_NAME = "USER_NAME"
     const val USER_AGE = "USER_AGE"
@@ -12,10 +11,11 @@ object SharedPreferencesKey {
     // App preference keys
     const val ACTIVE_LEVEL = "ACTIVE_LEVEL"
     const val IS_FIRST_STARTUP = "IS_FIRST_LOGIN"
-    const val BIO_AUTH_ENABLED = "BIO_AUTH_ENABLED"
+    const val USE_BIO = "BIO_AUTH_ENABLED"
     const val DEFAULT_CONTAINER = "DEFAULT_CONTAINER"
     const val DEFAULT_VOLUME = "DEFAULT_HIT_VOLUME"
     const val DEFAULT_GOAL = "DEFAULT_GOAL"
+    const val SYNC_ENABLED = "SYNC_ENABLED"
 
     // Data preference keys
     const val RECOMMENDED_GOAL = "RECOMMENDED_GOAL"
