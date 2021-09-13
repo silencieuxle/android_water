@@ -91,8 +91,7 @@ class MainFragment : FragmentBase<MainViewModel>(R.layout.main_fragment) {
 
         if (prefManager.getBooleanVal(SharedPreferencesKey.USE_BIO, false)) {
             val bm = BiometricManager.from(requireContext())
-            when (val canAuthenticate =
-                bm.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_WEAK)) {
+            when (bm.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_WEAK)) {
                 BiometricManager.BIOMETRIC_SUCCESS -> {
                     val promptInfo = BiometricPrompt.PromptInfo.Builder()
                         .setTitle(getString(R.string.bio_prompt_title))
@@ -120,6 +119,8 @@ class MainFragment : FragmentBase<MainViewModel>(R.layout.main_fragment) {
                                 }, 10)
                             }
                         }).authenticate(promptInfo)
+                }
+                else -> {
                 }
             }
         }

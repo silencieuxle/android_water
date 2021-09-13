@@ -19,9 +19,7 @@ import me.gndev.water.core.constant.Container
 import me.gndev.water.core.constant.SharedPreferencesKey
 import me.gndev.water.core.model.EmptyViewModel
 import me.gndev.water.databinding.SettingsFragmentBinding
-import me.gndev.water.service.BiometricService
 import me.gndev.water.util.DialogUtils
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class SettingsFragment : FragmentBase<EmptyViewModel>(R.layout.settings_fragment) {
@@ -36,9 +34,6 @@ class SettingsFragment : FragmentBase<EmptyViewModel>(R.layout.settings_fragment
     private lateinit var clVolume: View
     private lateinit var tvContainerSummary: TextView
     private lateinit var tvVolumeSummary: TextView
-
-    @Inject
-    lateinit var biometricService: BiometricService
 
     private var useBio: Boolean = false
     private var syncEnabled: Boolean = false
@@ -76,8 +71,7 @@ class SettingsFragment : FragmentBase<EmptyViewModel>(R.layout.settings_fragment
 
                                 override fun onPositiveButtonClick() {
                                     val bm = BiometricManager.from(context)
-                                    when (val canAuthenticate =
-                                        bm.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_WEAK)) {
+                                    when (bm.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_WEAK)) {
                                         BiometricManager.BIOMETRIC_SUCCESS -> {
                                             val promptInfo = BiometricPrompt.PromptInfo.Builder()
                                                 .setTitle(getString(R.string.bio_prompt_title))
@@ -114,6 +108,8 @@ class SettingsFragment : FragmentBase<EmptyViewModel>(R.layout.settings_fragment
                                                     }
                                                 }).authenticate(promptInfo)
                                         }
+                                        else -> {
+                                        }
                                     }
                                 }
 
@@ -130,8 +126,7 @@ class SettingsFragment : FragmentBase<EmptyViewModel>(R.layout.settings_fragment
                 } else {
                     if (prefManager.getBooleanVal(SharedPreferencesKey.USE_BIO, true)) {
                         val bm = BiometricManager.from(context)
-                        when (val canAuthenticate =
-                            bm.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_WEAK)) {
+                        when (bm.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_WEAK)) {
                             BiometricManager.BIOMETRIC_SUCCESS -> {
                                 val promptInfo = BiometricPrompt.PromptInfo.Builder()
                                     .setTitle(getString(R.string.bio_prompt_title))
@@ -163,6 +158,8 @@ class SettingsFragment : FragmentBase<EmptyViewModel>(R.layout.settings_fragment
                                             swUseBio.isChecked = true
                                         }
                                     }).authenticate(promptInfo)
+                            }
+                            else -> {
                             }
                         }
                     }
