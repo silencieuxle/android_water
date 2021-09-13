@@ -19,18 +19,20 @@ object DialogUtils {
     fun showAlert(
         context: Context, title: String, message: String, listener: AlertDialogListener? = null
     ) {
-        val builder = AlertDialog.Builder(context)
-        builder.setTitle(title)
-        builder.setMessage(message)
+        AlertDialog.Builder(context).apply {
+            setTitle(title)
+            setMessage(message)
 
-        builder.setPositiveButton(android.R.string.ok) { _, _ ->
-            listener?.onPositiveButtonClick()
-        }
+            setPositiveButton(android.R.string.ok) { _, _ ->
+                listener?.onPositiveButtonClick()
+            }
 
-        builder.setNegativeButton(android.R.string.cancel) { _, _ ->
-            listener?.onNegativeButtonClick()
+            setNegativeButton(android.R.string.cancel) { _, _ ->
+                listener?.onNegativeButtonClick()
+            }
+            setCancelable(false)
+            show()
         }
-        builder.show()
     }
 
     fun showAlertDialog(

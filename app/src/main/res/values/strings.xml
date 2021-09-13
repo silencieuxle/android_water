@@ -10,13 +10,12 @@
     <string name="app_name">Water</string>
     <string name="bio_auth_error">There was a problem while trying to authenticate using biometric. Please try again later.</string>
     <string name="dialog_enable_biometric_title">Use biometric?</string>
-    <string name="dialog_enable_biometric_message">Do you want to use biometric to authorize the Water?</string>
+    <string name="dialog_enable_biometric_message">Do you want to use biometric to authorize access?</string>
     <string name="bio_auth_success">bio_auth_success</string>
     <string name="bio_auth_failed">bio_auth_failed</string>
     <string name="bio_auth_no_hardware">bio_auth_no_hardware</string>
-    <string name="bio_prompt_title">bio_prompt_title</string>
+    <string name="bio_prompt_title">Authenticate yourself</string>
     <string name="cancel">Cancel</string>
-
     <string name="done">Done</string>
     <string name="default_volume">Volume</string>
     <string name="add">Take a shot</string>
@@ -26,7 +25,6 @@
     <string name="sex_male">MALE</string>
     <string name="sex_female">FEMALE</string>
     <string name="no_score_message">HIT THAT BUTTON!!!</string>
-
 
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
@@ -80,4 +78,7 @@
     <string name="container_selector_bottomsheet_title">Select one container</string>
     <string name="app_settings_sync_account">Google Account</string>
     <string name="settings">Settings</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="bio_prompt_subtitle">Use your biometric to access Water.</string>
 </resources>

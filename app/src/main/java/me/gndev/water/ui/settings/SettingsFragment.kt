@@ -1,11 +1,15 @@
 package me.gndev.water.ui.settings
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.biometric.BiometricManager
+import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import com.google.android.material.switchmaterial.SwitchMaterial
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,13 +20,11 @@ import me.gndev.water.core.constant.SharedPreferencesKey
 import me.gndev.water.core.model.EmptyViewModel
 import me.gndev.water.databinding.SettingsFragmentBinding
 import me.gndev.water.service.BiometricService
-import java.util.concurrent.Executor
+import me.gndev.water.util.DialogUtils
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class SettingsFragment @Inject constructor(
-    private val biometricService: BiometricService
-) : FragmentBase<EmptyViewModel>(R.layout.settings_fragment) {
+class SettingsFragment : FragmentBase<EmptyViewModel>(R.layout.settings_fragment) {
     private var _binding: SettingsFragmentBinding? = null
     private val binding get() = _binding!!
 
@@ -35,13 +37,13 @@ class SettingsFragment @Inject constructor(
     private lateinit var tvContainerSummary: TextView
     private lateinit var tvVolumeSummary: TextView
 
+    @Inject
+    lateinit var biometricService: BiometricService
+
     private var useBio: Boolean = false
     private var syncEnabled: Boolean = false
     private var container: String = Container.CUP
     private var volume: Int = 100
-
-    @Inject
-    lateinit var executor: Executor
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -60,20 +62,114 @@ class SettingsFragment @Inject constructor(
             isChecked = useBio
             setOnClickListener {
                 if (swUseBio.isChecked) {
-                    Toast.makeText(requireContext(), "swUseBio", Toast.LENGTH_SHORT).show()
-                    biometricService.showEnableBioAuthDialog(
-                        requireContext(),
-                        ContextCompat.getMainExecutor(requireContext()),
-                        this@SettingsFragment
+                    DialogUtils.showConfirmationDialog(
+                        context, layoutInflater,
+                        DialogUtils.ConfirmationDialogConfig(
+                            title = getString(R.string.dialog_enable_biometric_title),
+                            message = getString(R.string.dialog_enable_biometric_message),
+                            positiveButtonTitle = getString(R.string.yes),
+                            negativeButtonTitle = getString(R.string.no),
+                            listener = object : DialogUtils.AlertDialogListener {
+                                override fun onDismiss() {
+
+                                }
+
+                                override fun onPositiveButtonClick() {
+                                    val bm = BiometricManager.from(context)
+                                    when (val canAuthenticate =
+                                        bm.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_WEAK)) {
+                                        BiometricManager.BIOMETRIC_SUCCESS -> {
+                                            val promptInfo = BiometricPrompt.PromptInfo.Builder()
+                                                .setTitle(getString(R.string.bio_prompt_title))
+                                                .setNegativeButtonText(getString(R.string.cancel))
+                                                .build()
+                                            BiometricPrompt(
+                                                this@SettingsFragment,
+                                                ContextCompat.getMainExecutor(context),
+                                                object : BiometricPrompt.AuthenticationCallback() {
+                                                    override fun onAuthenticationError(
+                                                        errorCode: Int,
+                                                        errString: CharSequence
+                                                    ) {
+                                                        super.onAuthenticationError(
+                                                            errorCode,
+                                                            errString
+                                                        )
+                                                        swUseBio.isChecked = false
+                                                    }
+
+                                                    override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
+                                                        super.onAuthenticationSucceeded(result)
+                                                        tvUseBioSummary.text =
+                                                            getString(R.string.setting_on)
+                                                        prefManager.setVal(
+                                                            SharedPreferencesKey.USE_BIO,
+                                                            true
+                                                        )
+                                                    }
+
+                                                    override fun onAuthenticationFailed() {
+                                                        super.onAuthenticationFailed()
+                                                        swUseBio.isChecked = false
+                                                    }
+                                                }).authenticate(promptInfo)
+                                        }
+                                    }
+                                }
+
+                                override fun onNegativeButtonClick() {
+                                    tvUseBioSummary.text = getString(R.string.setting_off)
+                                    prefManager.setVal(SharedPreferencesKey.USE_BIO, false)
+                                    Handler(Looper.getMainLooper()).postDelayed({
+                                        swUseBio.isChecked = false
+                                    }, 50)
+                                }
+                            }
+                        )
                     )
-                    tvUseBioSummary.text = getString(R.string.setting_on)
                 } else {
-                    Toast.makeText(requireContext(), "swUseBio", Toast.LENGTH_SHORT).show()
-                    tvUseBioSummary.text = getString(R.string.setting_off)
-                    prefManager.setVal(SharedPreferencesKey.USE_BIO, true)
+                    if (prefManager.getBooleanVal(SharedPreferencesKey.USE_BIO, true)) {
+                        val bm = BiometricManager.from(context)
+                        when (val canAuthenticate =
+                            bm.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_WEAK)) {
+                            BiometricManager.BIOMETRIC_SUCCESS -> {
+                                val promptInfo = BiometricPrompt.PromptInfo.Builder()
+                                    .setTitle(getString(R.string.bio_prompt_title))
+                                    .setNegativeButtonText(getString(R.string.cancel))
+                                    .build()
+                                BiometricPrompt(
+                                    this@SettingsFragment,
+                                    ContextCompat.getMainExecutor(context),
+                                    object : BiometricPrompt.AuthenticationCallback() {
+                                        override fun onAuthenticationError(
+                                            errorCode: Int,
+                                            errString: CharSequence
+                                        ) {
+                                            super.onAuthenticationError(
+                                                errorCode,
+                                                errString
+                                            )
+                                            swUseBio.isChecked = true
+                                        }
+
+                                        override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
+                                            super.onAuthenticationSucceeded(result)
+                                            tvUseBioSummary.text = getString(R.string.setting_off)
+                                            prefManager.setVal(SharedPreferencesKey.USE_BIO, false)
+                                        }
+
+                                        override fun onAuthenticationFailed() {
+                                            super.onAuthenticationFailed()
+                                            swUseBio.isChecked = true
+                                        }
+                                    }).authenticate(promptInfo)
+                            }
+                        }
+                    }
                 }
             }
         }
+
         swSync = binding.swAppSettingSync.apply {
             isChecked = syncEnabled
             setOnClickListener {

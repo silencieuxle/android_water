@@ -1,12 +1,17 @@
 package me.gndev.water.ui.main
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.biometric.BiometricManager
+import androidx.biometric.BiometricPrompt
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
@@ -59,7 +64,6 @@ class MainFragment : FragmentBase<MainViewModel>(R.layout.main_fragment) {
                 tietContainer.setText(container)
             }
         }
-
     }
 
     override fun onCreateView(
@@ -80,6 +84,45 @@ class MainFragment : FragmentBase<MainViewModel>(R.layout.main_fragment) {
                     requireActivity().finish()
                 }
             })
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        if (prefManager.getBooleanVal(SharedPreferencesKey.USE_BIO, false)) {
+            val bm = BiometricManager.from(requireContext())
+            when (val canAuthenticate =
+                bm.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_WEAK)) {
+                BiometricManager.BIOMETRIC_SUCCESS -> {
+                    val promptInfo = BiometricPrompt.PromptInfo.Builder()
+                        .setTitle(getString(R.string.bio_prompt_title))
+                        .setTitle(getString(R.string.bio_prompt_subtitle))
+                        .setDeviceCredentialAllowed(true)
+                        .build()
+                    BiometricPrompt(
+                        this,
+                        ContextCompat.getMainExecutor(context),
+                        object : BiometricPrompt.AuthenticationCallback() {
+                            override fun onAuthenticationError(
+                                errorCode: Int,
+                                errString: CharSequence
+                            ) {
+                                super.onAuthenticationError(errorCode, errString)
+                                Handler(Looper.getMainLooper()).postDelayed({
+                                    requireActivity().finish()
+                                }, 10)
+                            }
+
+                            override fun onAuthenticationFailed() {
+                                super.onAuthenticationFailed()
+                                Handler(Looper.getMainLooper()).postDelayed({
+                                    requireActivity().finish()
+                                }, 10)
+                            }
+                        }).authenticate(promptInfo)
+                }
+            }
+        }
     }
 
     override fun setupViews() {
