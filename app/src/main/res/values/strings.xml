@@ -81,4 +81,5 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="bio_prompt_subtitle">Use your biometric to access Water.</string>
+    <string name="app_settings_session_time">Session Time</string>
 </resources>

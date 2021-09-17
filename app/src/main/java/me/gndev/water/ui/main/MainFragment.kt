@@ -10,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.biometric.BiometricManager
+import androidx.biometric.BiometricManager.Authenticators.*
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.setFragmentResultListener
@@ -32,6 +33,7 @@ import me.gndev.water.data.entity.Game
 import me.gndev.water.data.entity.Turn
 import me.gndev.water.data.repository.TurnRepository
 import me.gndev.water.databinding.MainFragmentBinding
+import me.gndev.water.util.DateTimeUtils
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -90,37 +92,47 @@ class MainFragment : FragmentBase<MainViewModel>(R.layout.main_fragment) {
         super.onViewCreated(view, savedInstanceState)
 
         if (prefManager.getBooleanVal(SharedPreferencesKey.USE_BIO, false)) {
-            val bm = BiometricManager.from(requireContext())
-            when (bm.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_WEAK)) {
-                BiometricManager.BIOMETRIC_SUCCESS -> {
-                    val promptInfo = BiometricPrompt.PromptInfo.Builder()
-                        .setTitle(getString(R.string.bio_prompt_title))
-                        .setTitle(getString(R.string.bio_prompt_subtitle))
-                        .setDeviceCredentialAllowed(true)
-                        .build()
-                    BiometricPrompt(
-                        this,
-                        ContextCompat.getMainExecutor(context),
-                        object : BiometricPrompt.AuthenticationCallback() {
-                            override fun onAuthenticationError(
-                                errorCode: Int,
-                                errString: CharSequence
-                            ) {
-                                super.onAuthenticationError(errorCode, errString)
-                                Handler(Looper.getMainLooper()).postDelayed({
-                                    requireActivity().finish()
-                                }, 10)
-                            }
+            val sessionLength = prefManager.getIntVal(SharedPreferencesKey.SESSION_LENGTH, 15)
+            val recentLogin = prefManager.getLongVal(
+                SharedPreferencesKey.RECENT_LOGIN_TIME,
+                DateTimeUtils.getCurrentTimeAsNumber()
+            )
+            val currentTime = DateTimeUtils.getCurrentTimeAsNumber()
+            if (currentTime > recentLogin + (sessionLength / 60) * 100 + sessionLength % 60) {
+                val bm = BiometricManager.from(requireContext())
+                when (bm.canAuthenticate(BIOMETRIC_WEAK)) {
+                    BiometricManager.BIOMETRIC_SUCCESS -> {
+                        val promptInfo = BiometricPrompt.PromptInfo.Builder()
+                            .setTitle(getString(R.string.bio_prompt_title))
+                            .setTitle(getString(R.string.bio_prompt_subtitle))
+                            .setAllowedAuthenticators(BIOMETRIC_STRONG or DEVICE_CREDENTIAL)
+                            .build()
+                        BiometricPrompt(
+                            this,
+                            ContextCompat.getMainExecutor(context),
+                            object : BiometricPrompt.AuthenticationCallback() {
+                                override fun onAuthenticationError(
+                                    errorCode: Int,
+                                    errString: CharSequence
+                                ) {
+                                    super.onAuthenticationError(errorCode, errString)
+                                    Handler(Looper.getMainLooper()).postDelayed({
+                                        requireActivity().finish()
+                                    }, 10)
+                                }
 
-                            override fun onAuthenticationFailed() {
-                                super.onAuthenticationFailed()
-                                Handler(Looper.getMainLooper()).postDelayed({
-                                    requireActivity().finish()
-                                }, 10)
-                            }
-                        }).authenticate(promptInfo)
-                }
-                else -> {
+                                override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
+                                    super.onAuthenticationSucceeded(result)
+                                    prefManager.setVal(SharedPreferencesKey.RECENT_LOGIN_TIME, DateTimeUtils.getCurrentTimeAsNumber())
+                                }
+
+                                override fun onAuthenticationFailed() {
+                                    super.onAuthenticationFailed()
+                                }
+                            }).authenticate(promptInfo)
+                    }
+                    else -> {
+                    }
                 }
             }
         }

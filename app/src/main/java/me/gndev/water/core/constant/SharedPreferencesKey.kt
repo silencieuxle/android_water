@@ -12,6 +12,8 @@ object SharedPreferencesKey {
     const val ACTIVE_LEVEL = "ACTIVE_LEVEL"
     const val IS_FIRST_STARTUP = "IS_FIRST_LOGIN"
     const val USE_BIO = "BIO_AUTH_ENABLED"
+    const val RECENT_LOGIN_TIME = "RECENT_LOGIN_TIME"
+    const val SESSION_LENGTH = "SESSION_LENGTH"
     const val DEFAULT_CONTAINER = "DEFAULT_CONTAINER"
     const val DEFAULT_VOLUME = "DEFAULT_HIT_VOLUME"
     const val DEFAULT_GOAL = "DEFAULT_GOAL"
