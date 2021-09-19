@@ -11,24 +11,24 @@ import me.gndev.water.R
 import me.gndev.water.core.base.DataSelectModelBase
 
 abstract class DropdownAdapter<T : DataSelectModelBase>(
-    private val c: Context,
-    @LayoutRes val rl: Int,
-    private val ds: List<T>
-) : ArrayAdapter<T>(c, rl, ds) {
+    private val context: Context,
+    @LayoutRes val layout: Int,
+    private val dataSet: List<T>
+) : ArrayAdapter<T>(context, layout, dataSet) {
 
-    override fun getCount(): Int = ds.size
+    override fun getCount(): Int = dataSet.size
 
-    override fun getItem(position: Int): T = ds[position]
+    override fun getItem(position: Int): T = dataSet[position]
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        val view = convertView ?: LayoutInflater.from(c).inflate(rl, parent, false)
-        view.findViewById<TextView>(R.id.tv_dropdown_item_text).text = ds[position].t
+        val view = convertView ?: LayoutInflater.from(context).inflate(layout, parent, false)
+        view.findViewById<TextView>(R.id.tv_dropdown_item_text).text = dataSet[position].t
         return view
     }
 
     override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
-        val view = convertView ?: LayoutInflater.from(c).inflate(rl, parent, false)
-        view.findViewById<TextView>(R.id.tv_dropdown_item_text).text = ds[position].t
+        val view = convertView ?: LayoutInflater.from(context).inflate(layout, parent, false)
+        view.findViewById<TextView>(R.id.tv_dropdown_item_text).text = dataSet[position].t
         return view
     }
 }

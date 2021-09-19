@@ -10,8 +10,8 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import dagger.hilt.android.AndroidEntryPoint
 import me.gndev.water.R
-import me.gndev.water.core.model.EmptyViewModel
 import me.gndev.water.core.base.FragmentBase
+import me.gndev.water.core.model.EmptyViewModel
 import me.gndev.water.databinding.OnboardingFragmentBinding
 
 @AndroidEntryPoint
@@ -20,11 +20,7 @@ class OnboardingFragment :
     private var _binding: OnboardingFragmentBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var viewAdapter: OnboardingFragmentStateAdapter
     private lateinit var vpOnboarding: ViewPager2
-    /*private lateinit var ivFirstStep: ImageView
-    private lateinit var ivSecondStep: ImageView
-    private lateinit var ivThirdStep: ImageView*/
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,13 +48,10 @@ class OnboardingFragment :
             adapter = viewAdapter
             registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
-                    /*updateStepper(position)*/
-                    // Disable swipe if navigated to step 2
                     if (position == 1) isUserInputEnabled = false
                 }
             })
-            // isUserInputEnabled = false;
-            // setPageTransformer(FadePageTransformer())
+
             // Setting the overscroll mode in the viewpager xml won't disable the overscroll effect
             // Refer to this https://stackoverflow.com/a/56942231/4138362
             (getChildAt(0) as RecyclerView).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
@@ -69,11 +62,7 @@ class OnboardingFragment :
         actionBar?.hide()
     }
 
-    override fun setupViews() {
-        /*ivFirstStep = binding.ivFirstStep
-        ivSecondStep = binding.ivSecondStep
-        ivThirdStep = binding.ivThirdStep*/
-    }
+    override fun setupViews() { }
 
     override fun subscribeObservers() {
     }
@@ -81,44 +70,6 @@ class OnboardingFragment :
     fun updateViewPager(position: Int) {
         vpOnboarding.currentItem = position
     }
-
-    /*private fun updateStepper(index: Int) {
-        when (index) {
-            0 -> {
-                ivFirstStep.setColorFilter(
-                    ContextCompat.getColor(requireContext(), R.color.purpleDarker)
-                )
-                ivSecondStep.setColorFilter(
-                    ContextCompat.getColor(requireContext(), R.color.white)
-                )
-                ivThirdStep.setColorFilter(
-                    ContextCompat.getColor(requireContext(), R.color.white)
-                )
-            }
-            1 -> {
-                ivSecondStep.setColorFilter(
-                    ContextCompat.getColor(requireContext(), R.color.purpleDarker)
-                )
-                ivFirstStep.setColorFilter(
-                    ContextCompat.getColor(requireContext(), R.color.white)
-                )
-                ivThirdStep.setColorFilter(
-                    ContextCompat.getColor(requireContext(), R.color.white)
-                )
-            }
-            2 -> {
-                ivThirdStep.setColorFilter(
-                    ContextCompat.getColor(requireContext(), R.color.purpleDarker)
-                )
-                ivFirstStep.setColorFilter(
-                    ContextCompat.getColor(requireContext(), R.color.white)
-                )
-                ivSecondStep.setColorFilter(
-                    ContextCompat.getColor(requireContext(), R.color.white)
-                )
-            }
-        }
-    }*/
 }
 
 class OnboardingFragmentStateAdapter(
@@ -131,20 +82,3 @@ class OnboardingFragmentStateAdapter(
         return childFragments[position]
     }
 }
-
-/*
-class FadePageTransformer : ViewPager2.PageTransformer {
-    override fun transformPage(view: View, position: Float) {
-        if (position <= -1.0F || position >= 1.0F) {
-            view.translationX = view.width * position;
-            view.alpha = 0.0F;
-        } else if (position == 0.0F) {
-            view.translationX = view.width * position;
-            view.alpha = 1.0F;
-        } else {
-            // position is between -1.0F & 0.0F OR 0.0F & 1.0F
-            view.translationX = view.width * -position;
-            view.alpha = 1.0F - abs(position);
-        }
-    }
-}*/

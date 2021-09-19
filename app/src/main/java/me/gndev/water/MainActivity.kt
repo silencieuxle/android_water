@@ -1,6 +1,8 @@
 package me.gndev.water
 
 import android.annotation.SuppressLint
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Context
 import android.graphics.Color
 import android.graphics.Rect
@@ -59,6 +61,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.currentGame.observe(this, {
             // This will cause the whole app lays out in fullscreen
             if (it != null) {
+
                 val isFirstStartUp =
                     prefManager.getBooleanVal(SharedPreferencesKey.IS_FIRST_STARTUP, true)
                 findViewById<View>(R.id.nav_host_fragment).applySystemBarsInset()
@@ -178,6 +181,21 @@ class MainActivity : AppCompatActivity() {
             result = resources.getDimensionPixelSize(resourceId)
         }
         return result
+    }
+
+    private fun createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        val name = getString(R.string.app_name)
+        val descriptionText = getString(R.string.app_name)
+        val importance = NotificationManager.IMPORTANCE_HIGH
+        val channel = NotificationChannel(getString(R.string.app_name), name, importance).apply {
+            description = descriptionText
+        }
+        // Register the channel with the system
+        val notificationManager: NotificationManager =
+            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.createNotificationChannel(channel)
     }
 }
 

@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.switchmaterial.SwitchMaterial
 import dagger.hilt.android.AndroidEntryPoint
 import me.gndev.water.R
@@ -63,7 +64,9 @@ class SettingsFragment : FragmentBase<EmptyViewModel>(R.layout.settings_fragment
                             title = getString(R.string.dialog_enable_biometric_title),
                             message = getString(R.string.dialog_enable_biometric_message),
                             positiveButtonTitle = getString(R.string.yes),
+                            positiveButtonColor = R.color.white,
                             negativeButtonTitle = getString(R.string.no),
+                            negativeButtonColor = R.color.white,
                             listener = object : DialogUtils.AlertDialogListener {
                                 override fun onDismiss() {
 
@@ -75,7 +78,7 @@ class SettingsFragment : FragmentBase<EmptyViewModel>(R.layout.settings_fragment
                                         BiometricManager.BIOMETRIC_SUCCESS -> {
                                             val promptInfo = BiometricPrompt.PromptInfo.Builder()
                                                 .setTitle(getString(R.string.bio_prompt_title))
-                                                .setNegativeButtonText(getString(R.string.cancel))
+                                                .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_STRONG or BiometricManager.Authenticators.DEVICE_CREDENTIAL)
                                                 .build()
                                             BiometricPrompt(
                                                 this@SettingsFragment,
@@ -89,7 +92,10 @@ class SettingsFragment : FragmentBase<EmptyViewModel>(R.layout.settings_fragment
                                                             errorCode,
                                                             errString
                                                         )
-                                                        swUseBio.isChecked = false
+                                                        Toast.makeText(context, errString, Toast.LENGTH_SHORT).show()
+                                                        Handler(Looper.getMainLooper()).postDelayed({
+                                                            swUseBio.isChecked = false
+                                                        }, 50)
                                                     }
 
                                                     override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
@@ -104,11 +110,24 @@ class SettingsFragment : FragmentBase<EmptyViewModel>(R.layout.settings_fragment
 
                                                     override fun onAuthenticationFailed() {
                                                         super.onAuthenticationFailed()
-                                                        swUseBio.isChecked = false
+                                                        Handler(Looper.getMainLooper()).postDelayed({
+                                                            swUseBio.isChecked = false
+                                                        }, 50)
                                                     }
                                                 }).authenticate(promptInfo)
                                         }
                                         else -> {
+                                            showSnackBar(
+                                                null,
+                                                context.getString(R.string.bio_auth_no_hardware),
+                                                R.drawable.ic_water_drop,
+                                                null,
+                                                null,
+                                                Snackbar.LENGTH_SHORT
+                                            )
+                                            Handler(Looper.getMainLooper()).postDelayed({
+                                                swUseBio.isChecked = false
+                                            }, 50)
                                         }
                                     }
                                 }
