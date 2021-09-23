@@ -123,7 +123,10 @@ class MainFragment : FragmentBase<MainViewModel>(R.layout.main_fragment) {
 
                                 override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
                                     super.onAuthenticationSucceeded(result)
-                                    prefManager.setVal(SharedPreferencesKey.RECENT_LOGIN_TIME, DateTimeUtils.getCurrentTimeAsNumber())
+                                    prefManager.setVal(
+                                        SharedPreferencesKey.RECENT_LOGIN_TIME,
+                                        DateTimeUtils.getCurrentTimeAsNumber()
+                                    )
                                 }
 
                                 override fun onAuthenticationFailed() {
@@ -136,6 +139,18 @@ class MainFragment : FragmentBase<MainViewModel>(R.layout.main_fragment) {
                 }
             }
         }
+
+        /*val intent = Intent(requireContext(), MainActivity::class.java)
+        val pendingIntent: PendingIntent = PendingIntent.getActivity(requireContext(), 0, intent, 0)
+
+        NotificationUtils.sendNotification(
+            requireContext(),
+            getString(R.string.app_name),
+            "TEST",
+            "DRINK NOW",
+            R.drawable.ic_water_drop,
+            pendingIntent
+        )*/
     }
 
     override fun setupViews() {

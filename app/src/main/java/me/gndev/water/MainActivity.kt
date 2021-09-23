@@ -23,6 +23,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.NavHostFragment
+import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -34,10 +37,13 @@ import me.gndev.water.core.model.DataResult
 import me.gndev.water.data.entity.Game
 import me.gndev.water.data.repository.GameRepository
 import me.gndev.water.data.share_preferences.PrefManager
+import me.gndev.water.service.NotificationWorker
 import me.gndev.water.util.CommonExtensions.applySystemBarsInset
 import me.gndev.water.util.DateTimeUtils
 import me.gndev.water.util.DimensionUtils
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -61,7 +67,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.currentGame.observe(this, {
             // This will cause the whole app lays out in fullscreen
             if (it != null) {
-
+                createNotificationChannel()
                 val isFirstStartUp =
                     prefManager.getBooleanVal(SharedPreferencesKey.IS_FIRST_STARTUP, true)
                 findViewById<View>(R.id.nav_host_fragment).applySystemBarsInset()
@@ -79,6 +85,14 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+        val workRequest =
+            PeriodicWorkRequestBuilder<NotificationWorker>(15, TimeUnit.MINUTES).build()
+        WorkManager.getInstance(applicationContext)
+            .enqueueUniquePeriodicWork(
+                getString(R.string.app_name),
+                ExistingPeriodicWorkPolicy.REPLACE,
+                workRequest
+            )
     }
 
     // Touch outside dismiss keyboard
